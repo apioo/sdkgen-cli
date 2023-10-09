@@ -22,7 +22,7 @@ var generateCmd = &cobra.Command{
 		var client = sdkClient.GetClient()
 
 		var generatorType = args[0]
-		var file = args[1]
+		var schemaFile = args[1]
 		var outputDir = args[2]
 
 		stat, err := os.Stat(outputDir)
@@ -34,7 +34,7 @@ var generateCmd = &cobra.Command{
 			log.Fatal("Provided output directory does not exist")
 		}
 
-		jsonFile, err := os.Open(file)
+		jsonFile, err := os.Open(schemaFile)
 		if err != nil {
 			log.Fatal(err)
 		}
