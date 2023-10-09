@@ -9,6 +9,8 @@ import (
 type SdkClient struct {
 	ClientId     string
 	ClientSecret string
+	Namespace    string
+	BaseUrl      string
 }
 
 func (sdkClient *SdkClient) GetClient() *sdk.Client {

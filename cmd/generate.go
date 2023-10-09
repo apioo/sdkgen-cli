@@ -15,8 +15,8 @@ func init() {
 
 var generateCmd = &cobra.Command{
 	Use:   "generate",
-	Short: "Converts a provided ",
-	Long:  `All software has versions. This is Hugo's`,
+	Short: "Generates an SDK based on a provided TypeAPI specification",
+	Long:  `Generates an SDK based on a provided TypeAPI specification, more information about TypeAPI at https://typeapi.org/`,
 	Args:  cobra.ExactArgs(3),
 	Run: func(cmd *cobra.Command, args []string) {
 		var client = sdkClient.GetClient()
@@ -24,12 +24,10 @@ var generateCmd = &cobra.Command{
 		var generatorType = args[0]
 		var file = args[1]
 		var outputDir = args[2]
-		var namespace = ""
-		var baseUrl = ""
 
 		stat, err := os.Stat(outputDir)
 		if err != nil {
-			log.Fatal(err)
+			log.Fatal("Provided output directory does not exist")
 		}
 
 		if !stat.IsDir() {
@@ -52,7 +50,7 @@ var generateCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		response, err := client.Generator().Generate(generatorType, payload, namespace, baseUrl)
+		response, err := client.Generator().Generate(generatorType, payload, sdkClient.Namespace, sdkClient.BaseUrl)
 		if err != nil {
 			log.Fatal(err)
 		}
