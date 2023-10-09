@@ -14,7 +14,7 @@ func init() {
 }
 
 var generateCmd = &cobra.Command{
-	Use:   "generate",
+	Use:   "generate [flags] TYPE SCHEMA_FILE OUTPUT_DIR",
 	Short: "Generates an SDK based on a provided TypeAPI specification",
 	Long:  `Generates an SDK based on a provided TypeAPI specification, more information about TypeAPI at https://typeapi.org/`,
 	Args:  cobra.ExactArgs(3),
