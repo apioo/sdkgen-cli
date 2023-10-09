@@ -9,9 +9,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "sdkgen",
 	Short: "SDKgen is a powerful code generator to automatically build client SDKs for your REST API.",
-	Long: `A Fast and Flexible Static Site Generator built with
-                love by spf13 and friends in Go.
-                Complete documentation is available at https://sdkgen.app/`,
+	Long:  `SDKgen is the reference TypeAPI code generator implementation which allows you to automatically build client SDKs for your REST API. Complete documentation is available at https://sdkgen.app/`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Do Stuff Here
 	},
