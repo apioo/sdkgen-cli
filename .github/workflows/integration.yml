@@ -83,7 +83,7 @@ jobs:
           TYPE: client-php
           CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
-          NAMESPACE: ""
+          NAMESPACE: "SDK"
         run: cd ../../ && docker-compose up
       - name: Move
         run: mv ../../output/*.php .

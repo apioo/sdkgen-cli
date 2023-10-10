@@ -12,14 +12,14 @@ require_once __DIR__ . '/Todos.php';
 require_once __DIR__ . '/Client.php';
 
 $credentials = new \Sdkgen\Client\Credentials\HttpBearer('foo');
-$client = new Client('http://localhost:1080', $credentials);
+$client = new \SDK\Client('http://localhost:1080', $credentials);
 
 assertGetHello($client);
 assertGetEntries($client);
 assertInsert($client);
 assertThrowException($client);
 
-function assertGetHello(Client $client): void
+function assertGetHello(\SDK\Client $client): void
 {
     $message = $client->test()->getHello();
 
@@ -28,7 +28,7 @@ function assertGetHello(Client $client): void
     }
 }
 
-function assertGetEntries(Client $client): void
+function assertGetEntries(\SDK\Client $client): void
 {
     $todos = $client->test()->getEntries(0, 16);
 
@@ -57,9 +57,9 @@ function assertGetEntries(Client $client): void
     }
 }
 
-function assertInsert(Client $client): void
+function assertInsert(\SDK\Client $client): void
 {
-    $payload = new Todo();
+    $payload = new \SDK\Todo();
     $payload->setTitle("baz");
 
     $message = $client->test()->insert($payload);
@@ -73,13 +73,13 @@ function assertInsert(Client $client): void
     }
 }
 
-function assertThrowException(Client $client): void
+function assertThrowException(\SDK\Client $client): void
 {
     try {
         $client->test()->throwException();
 
         throw new RuntimeException("Test assertThrowException failed: Expected an error");
-    } catch (ErrorException $e) {
+    } catch (\SDK\ErrorException $e) {
         if ($e->getPayload()->getMessage() != "Error") {
             throw new RuntimeException("Test assertThrowException failed: Error message does not match, got: " . $e->getPayload()->getMessage());
         }
