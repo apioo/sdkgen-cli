@@ -29,7 +29,7 @@ func assertGetHello(client *Client) {
 	}
 
 	if message.Message != "Hello World!" {
-		log.Fatal("Test assertGetHello failed: Message")
+		log.Fatal("Test assertGetHello failed: Message, got: " + message.Message)
 	}
 }
 
