@@ -18,4 +18,4 @@ RUN go mod download && go mod verify
 COPY . .
 RUN go build -v -o /usr/local/bin/sdkgen
 
-CMD ["sdkgen", "generate", "$TYPE", "output/typeapi.json", "output", "--client-id", "$CLIENT_ID", "--client-secret", "$CLIENT_SECRET", "--base-url", "$BASE_URL", "--namespace", "$NAMESPACE"]
+CMD ["sh", "-c", "/usr/local/bin/sdkgen generate $TYPE output/typeapi.json output --client-id=\"$CLIENT_ID\" --client-secret=\"$CLIENT_SECRET\" --base-url=\"$BASE_URL\" --namespace=\"$NAMESPACE\""]
