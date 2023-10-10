@@ -49,5 +49,5 @@ directly. To use the docker file you need to set the fitting credentials at the 
 
 > docker-compose up
 
-This builds the docker image and reads the ./output/typeapi.json specification and writes the generated code also to the
-./output dir.
+This builds the docker image and reads the `./output/typeapi.json` specification and writes the generated code also to
+the `./output` dir.
