@@ -1,0 +1,63 @@
+[
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/hello/world"
+    },
+    "httpResponse": {
+      "body": {
+        "message": "Hello World!"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/todo",
+      "queryStringParameters": {
+        "startIndex": ["0"],
+        "count": ["16"]
+      }
+    },
+    "httpResponse": {
+      "body": {
+        "totalResults": 4,
+        "startIndex": 0,
+        "itemsPerPage": 16,
+        "entry": [{
+          "title": "foo"
+        }, {
+          "title": "bar"
+        }]
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/todo",
+      "body": {
+        "title": "baz"
+      }
+    },
+    "httpResponse": {
+      "body": {
+        "success": true,
+        "message": "Successful"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/exception"
+    },
+    "httpResponse": {
+      "statusCode": 500,
+      "body": {
+        "success": false,
+        "message": "Error"
+      }
+    }
+  }
+]
