@@ -41,3 +41,13 @@ Lists all available types which can be used at the generate command.
   The client id is either your username or an app key which you can create at our backend.
 * __--client-secret__  
   This client secret is either your password or an app secret which you can create at our backend.
+
+## Docker
+
+This repository contains also a simple docker file to execute the generator if you d`ont want to use the binary
+directly. To use the docker file you need to set the fitting credentials at the `.env` file, then you can run:
+
+> docker-compose up
+
+This builds the docker image and reads the ./output/typeapi.json specification and writes the generated code also to the
+./output dir.

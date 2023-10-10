@@ -1,0 +1,12 @@
+version: '3'
+services:
+  sdkgen:
+    image: apioo-tech/sdkgen-geenrator
+    environment:
+      TYPE: "${TYPE}"
+      CLIENT_ID: "${CLIENT_ID}"
+      CLIENT_SECRET: "${CLIENT_SECRET}"
+      BASE_URL: "${BASE_URL}"
+      NAMESPACE: "${NAMESPACE}"
+    volumes:
+      - ./output:/usr/src/sdkgen/output
