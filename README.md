@@ -44,7 +44,7 @@ Lists all available types which can be used at the generate command.
 
 ## Docker
 
-This repository contains also a simple docker file to execute the generator if you d`ont want to use the binary
+This repository contains also a simple docker file to execute the generator if you dont want to use the binary
 directly. To use the docker file you need to set the fitting credentials at the `.env` file, then you can run:
 
 > docker-compose up
