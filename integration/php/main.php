@@ -11,7 +11,7 @@ require_once __DIR__ . '/Todo.php';
 require_once __DIR__ . '/Todos.php';
 require_once __DIR__ . '/Client.php';
 
-$credentials = new \Sdkgen\Client\Credentials\HttpBearer('foo');
+$credentials = new \Sdkgen\Client\Credentials\Anonymous();
 $client = new \SDK\Client('http://127.0.0.1:1080', $credentials);
 
 assertGetHello($client);

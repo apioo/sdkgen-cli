@@ -7,9 +7,7 @@ import (
 )
 
 func main() {
-	credentials := sdkgen.HttpBearer{
-		Token: "foo",
-	}
+	credentials := sdkgen.Anonymous{}
 
 	client, err := NewClient("http://127.0.0.1:1080", credentials)
 	if err != nil {

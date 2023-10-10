@@ -1,11 +1,11 @@
 package org.typeapi.generator;
 
-import app.sdkgen.client.Credentials.HttpBearer;
+import app.sdkgen.client.Credentials.Anonymous;
 import app.sdkgen.client.Exception.ClientException;
 
 public class Main {
     public static void main(String[] args) throws ClientException {
-        HttpBearer credentials = new HttpBearer("foo");
+        HttpBearer credentials = new Anonymous();
         Client client = new Client("http://127.0.0.1:1080", credentials);
 
         assertGetHello(client);
