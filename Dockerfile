@@ -2,7 +2,7 @@ FROM golang:1.21
 MAINTAINER Christoph Kappestein <christoph.kappestein@apioo.de>
 LABEL description="SDKgen Code Generator"
 
-ENV TYPE "client-typescript"
+ENV TYPE "client-java"
 ENV CLIENT_ID ""
 ENV CLIENT_SECRET ""
 ENV BASE_URL ""
