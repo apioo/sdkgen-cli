@@ -22,8 +22,8 @@ var sdkClient = SdkClient{
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringVar(&sdkClient.ClientId, "client-id", "", "The client id is either your username or an app key which you can create at our sdkgen.app backend.")
-	rootCmd.PersistentFlags().StringVar(&sdkClient.ClientSecret, "client-secret", "", "This client secret is either your password or an app secret which you can create at our sdkgen.app backend.")
+	rootCmd.PersistentFlags().StringVar(&sdkClient.ClientId, "client-id", os.Getenv("SDKGEN_CLIENT_ID"), "The client id is either your username or an app key which you can create at our sdkgen.app backend.")
+	rootCmd.PersistentFlags().StringVar(&sdkClient.ClientSecret, "client-secret", os.Getenv("SDKGEN_CLIENT_SECRET"), "This client secret is either your password or an app secret which you can create at our sdkgen.app backend.")
 
 	generateCmd.PersistentFlags().StringVar(&sdkClient.Namespace, "namespace", "", "Optional a namespace for the generated code.")
 	generateCmd.PersistentFlags().StringVar(&sdkClient.BaseUrl, "base-url", "", "Optional a base url for your SDK.")
