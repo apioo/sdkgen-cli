@@ -11,7 +11,7 @@ func main() {
 		Token: "foo",
 	}
 
-	client, err := NewClient("http://localhost:1080", credentials)
+	client, err := NewClient("http://127.0.0.1:1080", credentials)
 	if err != nil {
 		log.Fatal(err)
 	}

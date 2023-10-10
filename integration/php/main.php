@@ -12,7 +12,7 @@ require_once __DIR__ . '/Todos.php';
 require_once __DIR__ . '/Client.php';
 
 $credentials = new \Sdkgen\Client\Credentials\HttpBearer('foo');
-$client = new \SDK\Client('http://localhost:1080', $credentials);
+$client = new \SDK\Client('http://127.0.0.1:1080', $credentials);
 
 assertGetHello($client);
 assertGetEntries($client);
