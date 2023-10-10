@@ -5,6 +5,7 @@
       "method": "GET",
       "path": "/hello/world",
       "return": {
+        "code": 200,
         "schema": {
           "$ref": "Hello_World"
         }
@@ -29,6 +30,7 @@
         }
       },
       "return": {
+        "code": 200,
         "schema": {
           "$ref": "Todos"
         }
@@ -47,6 +49,7 @@
         }
       },
       "return": {
+        "code": 201,
         "schema": {
           "$ref": "Message"
         }

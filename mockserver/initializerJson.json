@@ -5,6 +5,7 @@
       "path": "/hello/world"
     },
     "httpResponse": {
+      "statusCode": 200,
       "body": {
         "message": "Hello World!"
       }
@@ -20,6 +21,7 @@
       }
     },
     "httpResponse": {
+      "statusCode": 200,
       "body": {
         "totalResults": 4,
         "startIndex": 0,
@@ -41,6 +43,7 @@
       }
     },
     "httpResponse": {
+      "statusCode": 201,
       "body": {
         "success": true,
         "message": "Successful"
