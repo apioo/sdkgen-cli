@@ -41,6 +41,16 @@ jobs:
   java:
     name: Java
     runs-on: ubuntu-latest
+    services:
+      mock:
+        image: mockserver/mockserver
+        ports:
+          - 1080:1080
+        env:
+          MOCKSERVER_PROPERTY_FILE: /config/mockserver.properties
+          MOCKSERVER_INITIALIZATION_JSON_PATH: /config/initializerJson.json
+        volumes:
+          - ./mockserver:/config
     defaults:
       run:
         working-directory: integration/java
@@ -67,6 +77,16 @@ jobs:
   php:
     name: PHP
     runs-on: ubuntu-latest
+    services:
+      mock:
+        image: mockserver/mockserver
+        ports:
+          - 1080:1080
+        env:
+          MOCKSERVER_PROPERTY_FILE: /config/mockserver.properties
+          MOCKSERVER_INITIALIZATION_JSON_PATH: /config/initializerJson.json
+        volumes:
+          - ./mockserver:/config
     defaults:
       run:
         working-directory: integration/php
