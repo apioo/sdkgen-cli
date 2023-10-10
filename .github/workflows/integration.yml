@@ -28,8 +28,8 @@ jobs:
       - name: Generate
         env:
           TYPE: client-go
-          CLIENT_ID: "${{ secrets.SDKGEN_CLIENT_ID }}"
-          CLIENT_SECRET: "${{ secrets.SDKGEN_CLIENT_SECRET }}"
+          CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
           NAMESPACE: "main"
         run: cd ../../ && docker-compose up
       - name: Move
@@ -54,8 +54,8 @@ jobs:
       - name: Generate
         env:
           TYPE: client-java
-          CLIENT_ID: "${{ secrets.SDKGEN_CLIENT_ID }}"
-          CLIENT_SECRET: "${{ secrets.SDKGEN_CLIENT_SECRET }}"
+          CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
           NAMESPACE: "org.typeapi.generator"
         run: cd ../../ && docker-compose up
       - name: Move
@@ -81,8 +81,8 @@ jobs:
       - name: Generate
         env:
           TYPE: client-php
-          CLIENT_ID: "${{ secrets.SDKGEN_CLIENT_ID }}"
-          CLIENT_SECRET: "${{ secrets.SDKGEN_CLIENT_SECRET }}"
+          CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
           NAMESPACE: ""
         run: cd ../../ && docker-compose up
       - name: Move
