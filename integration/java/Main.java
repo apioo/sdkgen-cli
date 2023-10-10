@@ -6,7 +6,7 @@ import app.sdkgen.client.Exception.ClientException;
 public class Main {
     public static void main(String[] args) throws ClientException {
         HttpBearer credentials = new HttpBearer("foo");
-        Client client = new Client("http://localhost", credentials);
+        Client client = new Client("http://localhost:1080", credentials);
 
         assertGetHello(client);
         assertGetEntries(client);
