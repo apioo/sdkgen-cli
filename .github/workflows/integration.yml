@@ -61,6 +61,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Wait for
+        run: wget -O - http://127.0.0.1:1080/hello/world > /dev/null
       - name: Generate
         env:
           TYPE: client-java
