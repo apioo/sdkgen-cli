@@ -63,6 +63,8 @@ jobs:
           distribution: 'temurin'
       - name: Debug
         run: docker logs "${{ job.services.mock.id }}"
+      - name: PWD
+        run: echo pwd
       - name: Generate
         env:
           TYPE: client-java
