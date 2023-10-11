@@ -3,6 +3,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/apioo/sdkgen-cli/sdk"
 	"github.com/spf13/cobra"
 	"io"
 	"log"
@@ -44,11 +45,8 @@ var generateCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		payload := map[string]any{}
-		err = json.Unmarshal(byteValue, &payload)
-		if err != nil {
-			log.Fatal(err)
-		}
+		payload := sdk.Passthru{}
+		payload["raw"] = json.RawMessage(byteValue)
 
 		response, err := client.Generator().Generate(generatorType, payload, sdkClient.Namespace, sdkClient.BaseUrl)
 		if err != nil {
