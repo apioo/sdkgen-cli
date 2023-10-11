@@ -64,7 +64,7 @@ jobs:
       - name: Debug
         run: docker logs "${{ job.services.mock.id }}"
       - name: PWD
-        run: echo pwd
+        run: pwd
       - name: Generate
         env:
           TYPE: client-java
