@@ -50,7 +50,7 @@ jobs:
           MOCKSERVER_PROPERTY_FILE: /config/mockserver.properties
           MOCKSERVER_INITIALIZATION_JSON_PATH: /config/initializerJson.json
         volumes:
-          - ../../mockserver:/config
+          - ./../../mockserver:/config
     defaults:
       run:
         working-directory: integration/java
