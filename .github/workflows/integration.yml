@@ -61,8 +61,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Wait for
-        run: wget -O - http://127.0.0.1:1080/hello/world > /dev/null
+      - name: Debug
+        run: docker logs "${{ job.services.mock.id }}"
       - name: Generate
         env:
           TYPE: client-java
@@ -76,6 +76,8 @@ jobs:
         run: mvn --batch-mode --update-snapshots package
       - name: Run
         run: java -jar target/generator-0.1.0-jar-with-dependencies.jar
+      - name: Debug
+        run: docker logs "${{ job.services.mock.id }}"
   php:
     name: PHP
     runs-on: ubuntu-latest
