@@ -6,7 +6,7 @@ ENV TYPE "client-java"
 ENV CLIENT_ID ""
 ENV CLIENT_SECRET ""
 ENV BASE_URL ""
-ENV NAMESPACE ""
+ENV NAMESPACE "app.sdkgen"
 
 VOLUME /usr/src/sdkgen/output
 
