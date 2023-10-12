@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"github.com/apioo/sdkgen-go"
 	"log"
 	"strconv"
@@ -87,7 +88,13 @@ func assertThrowException(client *Client) {
 		log.Fatal("Test assertThrowException failed: Expected an error")
 	}
 
-	if err.Error() != "" {
+	var exception *ErrorException
+	switch {
+	case errors.As(err, &exception):
+		if exception.Payload.Message != "Error" {
+			log.Fatal("Test assertThrowException failed: Error message does not match, got: " + err.Error())
+		}
+	default:
 		log.Fatal("Test assertThrowException failed: Error message does not match, got: " + err.Error())
 	}
 }
