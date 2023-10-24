@@ -17,7 +17,7 @@ var typesCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var client = sdkClient.GetClient()
 
-		types, err := client.Generator().GetTypes()
+		types, err := client.GetTypes()
 		if err != nil {
 			log.Fatal(err)
 		}

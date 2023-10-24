@@ -48,7 +48,7 @@ var generateCmd = &cobra.Command{
 		payload := sdk.Passthru{}
 		payload["raw"] = json.RawMessage(byteValue)
 
-		response, err := client.Generator().Generate(generatorType, payload, sdkClient.Namespace, sdkClient.BaseUrl)
+		response, err := client.Generate(generatorType, payload, sdkClient.Namespace, sdkClient.BaseUrl)
 		if err != nil {
 			log.Fatal(err)
 		}
