@@ -3,6 +3,40 @@ on:
   - pull_request
   - push
 jobs:
+  csharp:
+    name: CSharp
+    runs-on: ubuntu-latest
+    services:
+      mock:
+        image: mockserver/mockserver
+        ports:
+          - 1080:1080
+    defaults:
+      run:
+        working-directory: integration/csharp
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK 6.0.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+      - name: Init mockserver
+        run: "curl -X PUT http://127.0.0.1:1080/mockserver/expectation -H 'Content-Type: application/json' -d @./../../mockserver/initializerJson.json"
+      - name: Generate
+        env:
+          TYPE: client-csharp
+          CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
+          NAMESPACE: ""
+        run: cd ../../ && docker-compose up
+      - name: Move
+        run: mv ../../output/*.cs .
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Run
+        run: bin/Release/net6.0/generator
   go:
     name: Go
     runs-on: ubuntu-latest
