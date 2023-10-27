@@ -3,29 +3,29 @@ using Sdkgen.Client.Credentials;
 
 class Program
 {
-    static void Main()
+    static async Task Main()
     {
         Anonymous credentials = new Anonymous();
         Client client = new Client("http://127.0.0.1:1080", credentials);
 
-        AssertGetHello(client);
-        AssertGetEntries(client);
-        AssertInsert(client);
-        AssertThrowException(client);
+        await AssertGetHello(client);
+        await AssertGetEntries(client);
+        await AssertInsert(client);
+        await AssertThrowException(client);
     }
 
-    private static void AssertGetHello(Client client)
+    private static async Task AssertGetHello(Client client)
     {
-        HelloWorld message = client.Test().GetHello();
+        HelloWorld message = await client.Test().GetHello();
 
         if (message.Message != "Hello World!") {
             throw new Exception("Test assertGetHello failed: Message, got: " + message.Message);
         }
     }
 
-    private static void AssertGetEntries(Client client)
+    private static async Task AssertGetEntries(Client client)
     {
-        Todos todos = client.Test().GetEntries(0, 16);
+        Todos todos = await client.Test().GetEntries(0, 16);
 
         if (todos.TotalResults != 4) {
             throw new Exception("Test assertGetEntries failed: TotalResults, got: " + todos.TotalResults);
@@ -52,12 +52,12 @@ class Program
         }
     }
 
-    private static void AssertInsert(Client client)
+    private static async Task AssertInsert(Client client)
     {
         Todo payload = new Todo();
         payload.Title = "baz";
 
-        Response message = client.Test().Insert(payload);
+        Response message = await client.Test().Insert(payload);
 
         if (!message.Success) {
             throw new Exception("Test assertInsert failed: Success, got: " + message.Success);
@@ -68,10 +68,10 @@ class Program
         }
     }
 
-    private static void AssertThrowException(Client client)
+    private static async Task AssertThrowException(Client client)
     {
         try {
-            client.Test().ThrowException();
+            await client.Test().ThrowException();
 
             throw new Exception("Test assertThrowException failed: Expected an error");
         } catch (ErrorException e) {
