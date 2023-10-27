@@ -57,7 +57,7 @@ class Program
         Todo payload = new Todo();
         payload.Title = "baz";
 
-        Message message = client.Test().Insert(payload);
+        Response message = client.Test().Insert(payload);
 
         if (!message.Success) {
             throw new Exception("Test assertInsert failed: Success, got: " + message.Success);

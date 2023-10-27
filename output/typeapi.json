@@ -51,7 +51,7 @@
       "return": {
         "code": 201,
         "schema": {
-          "$ref": "Message"
+          "$ref": "Response"
         }
       }
     },
@@ -109,7 +109,7 @@
         }
       }
     },
-    "Message": {
+    "Response": {
       "type": "object",
       "properties": {
         "success": {

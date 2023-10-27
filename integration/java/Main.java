@@ -54,7 +54,7 @@ public class Main {
         Todo payload = new Todo();
         payload.setTitle("baz");
 
-        Message message = client.test().insert(payload);
+        Response message = client.test().insert(payload);
 
         if (!message.getSuccess()) {
             throw new RuntimeException("Test assertInsert failed: Success, got: " + message.getSuccess());

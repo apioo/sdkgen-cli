@@ -6,7 +6,7 @@ require_once __DIR__ . '/TestTag.php';
 require_once __DIR__ . '/Error.php';
 require_once __DIR__ . '/ErrorException.php';
 require_once __DIR__ . '/HelloWorld.php';
-require_once __DIR__ . '/Message.php';
+require_once __DIR__ . '/Response.php';
 require_once __DIR__ . '/Todo.php';
 require_once __DIR__ . '/Todos.php';
 require_once __DIR__ . '/Client.php';
