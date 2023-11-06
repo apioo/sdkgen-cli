@@ -3,10 +3,10 @@ services:
   sdkgen:
     build: .
     environment:
-      TYPE: "${TYPE}"
-      CLIENT_ID: "${CLIENT_ID}"
-      CLIENT_SECRET: "${CLIENT_SECRET}"
-      BASE_URL: "${BASE_URL}"
-      NAMESPACE: "${NAMESPACE}"
+      SDKGEN_TYPE: "${SDKGEN_TYPE}"
+      SDKGEN_CLIENT_ID: "${SDKGEN_CLIENT_ID}"
+      SDKGEN_CLIENT_SECRET: "${SDKGEN_CLIENT_SECRET}"
+      SDKGEN_BASE_URL: "${SDKGEN_BASE_URL}"
+      SDKGEN_NAMESPACE: "${SDKGEN_NAMESPACE}"
     volumes:
       - ./output:/usr/src/sdkgen/output

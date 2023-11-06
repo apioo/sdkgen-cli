@@ -1,9 +1,7 @@
 package cmd
 
 import (
-	"encoding/json"
 	"fmt"
-	"github.com/apioo/sdkgen-cli/sdk"
 	"github.com/spf13/cobra"
 	"io"
 	"log"
@@ -26,15 +24,6 @@ var generateCmd = &cobra.Command{
 		var schemaFile = args[1]
 		var outputDir = args[2]
 
-		stat, err := os.Stat(outputDir)
-		if err != nil {
-			log.Fatal("Provided output directory does not exist")
-		}
-
-		if !stat.IsDir() {
-			log.Fatal("Provided output directory does not exist")
-		}
-
 		jsonFile, err := os.Open(schemaFile)
 		if err != nil {
 			log.Fatal(err)
@@ -45,27 +34,7 @@ var generateCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		payload := sdk.Passthru{}
-		payload["raw"] = json.RawMessage(byteValue)
-
-		response, err := client.Generate(generatorType, payload, sdkClient.Namespace, sdkClient.BaseUrl)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		if response.Chunks != nil {
-			for file, code := range response.Chunks {
-				err := os.WriteFile(outputDir+"/"+file, []byte(code), 0644)
-				if err != nil {
-					log.Fatal(err)
-				}
-			}
-		} else if response.Output != "" {
-			err := os.WriteFile(outputDir+"/output", []byte(response.Output), 0644)
-			if err != nil {
-				log.Fatal(err)
-			}
-		}
+		Generate(client, generatorType, byteValue, outputDir, sdkClient.Namespace, sdkClient.BaseUrl)
 
 		fmt.Println("Generation successful!")
 		os.Exit(0)

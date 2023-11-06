@@ -4,6 +4,7 @@ import (
 	"github.com/apioo/sdkgen-cli/sdk"
 	"github.com/apioo/sdkgen-go"
 	"log"
+	"os"
 )
 
 type SdkClient struct {
@@ -15,6 +16,14 @@ type SdkClient struct {
 
 func (sdkClient *SdkClient) GetClient() *sdk.Client {
 	var tokenStore = sdkgen.MemoryTokenStore{}
+
+	if sdkClient.ClientId == "" {
+		sdkClient.ClientId = os.Getenv("SDKGEN_CLIENT_ID")
+	}
+
+	if sdkClient.ClientSecret == "" {
+		sdkClient.ClientSecret = os.Getenv("SDKGEN_CLIENT_SECRET")
+	}
 
 	credentials := sdkgen.OAuth2{
 		ClientId:     sdkClient.ClientId,
