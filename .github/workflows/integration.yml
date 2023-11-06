@@ -24,10 +24,10 @@ jobs:
         run: "curl -X PUT http://127.0.0.1:1080/mockserver/expectation -H 'Content-Type: application/json' -d @./../../mockserver/initializerJson.json"
       - name: Generate
         env:
-          TYPE: client-csharp
-          CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
-          NAMESPACE: ""
+          SDKGEN_TYPE: client-csharp
+          SDKGEN_CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
+          SDKGEN_CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
+          SDKGEN_NAMESPACE: ""
         run: cd ../../ && docker-compose up
       - name: Move
         run: mv ../../output/*.cs .
@@ -58,10 +58,10 @@ jobs:
         run: "curl -X PUT http://127.0.0.1:1080/mockserver/expectation -H 'Content-Type: application/json' -d @./../../mockserver/initializerJson.json"
       - name: Generate
         env:
-          TYPE: client-go
-          CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
-          NAMESPACE: "main"
+          SDKGEN_TYPE: client-go
+          SDKGEN_CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
+          SDKGEN_CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
+          SDKGEN_NAMESPACE: "main"
         run: cd ../../ && docker-compose up
       - name: Move
         run: mv ../../output/*.go .
@@ -93,10 +93,10 @@ jobs:
         run: docker logs "${{ job.services.mock.id }}"
       - name: Generate
         env:
-          TYPE: client-java
-          CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
-          NAMESPACE: "org.typeapi.generator"
+          SDKGEN_TYPE: client-java
+          SDKGEN_CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
+          SDKGEN_CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
+          SDKGEN_NAMESPACE: "org.typeapi.generator"
         run: cd ../../ && docker-compose up
       - name: Move
         run: mv ../../output/*.java .
@@ -127,10 +127,10 @@ jobs:
         run: "curl -X PUT http://127.0.0.1:1080/mockserver/expectation -H 'Content-Type: application/json' -d @./../../mockserver/initializerJson.json"
       - name: Generate
         env:
-          TYPE: client-php
-          CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
-          NAMESPACE: "SDK"
+          SDKGEN_TYPE: client-php
+          SDKGEN_CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
+          SDKGEN_CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
+          SDKGEN_NAMESPACE: "SDK"
         run: cd ../../ && docker-compose up
       - name: Move
         run: mv ../../output/*.php .
