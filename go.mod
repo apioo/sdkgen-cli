@@ -3,8 +3,8 @@ module github.com/apioo/sdkgen-cli
 go 1.18
 
 require (
-	github.com/apioo/sdkgen-go v1.0.0
-	github.com/spf13/cobra v1.7.0
+	github.com/apioo/sdkgen-go v1.0.2
+	github.com/spf13/cobra v1.8.0
 )
 
 require (
