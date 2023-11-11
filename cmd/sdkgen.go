@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"github.com/apioo/sdkgen-cli/sdk"
 	"io"
@@ -75,7 +76,7 @@ func Resolve(name string, version string) []byte {
 	}
 }
 
-func Generate(client *sdk.Client, generatorType string, schema []byte, outputDir string, namespace string, baseUrl string, remove bool) {
+func Generate(client *sdk.Client, generatorType string, schema []byte, outputDir string, namespace string, baseUrl string, mapping map[string]string, remove bool) {
 	stat, err := os.Stat(outputDir)
 	if err != nil {
 		log.Fatal("Provided output directory does not exist")
@@ -88,7 +89,17 @@ func Generate(client *sdk.Client, generatorType string, schema []byte, outputDir
 	payload := sdk.Passthru{}
 	payload["raw"] = json.RawMessage(schema)
 
-	response, err := client.Generate(generatorType, payload, namespace, baseUrl)
+	var config = make(map[string]any)
+	config["namespace"] = namespace
+	config["mapping"] = mapping
+	jsonConfig, err := json.Marshal(config)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var base64Config = base64.StdEncoding.EncodeToString(jsonConfig)
+
+	response, err := client.Generate(generatorType, payload, namespace, base64Config, baseUrl)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -160,10 +171,11 @@ type Schema struct {
 }
 
 type Package struct {
-	Version   string `json:"version"`
-	Target    string `json:"target"`
-	Namespace string `json:"namespace"`
-	BaseUrl   string `json:"baseUrl"`
+	Version   string            `json:"version"`
+	Target    string            `json:"target"`
+	Namespace string            `json:"namespace"`
+	BaseUrl   string            `json:"baseUrl"`
+	Mapping   map[string]string `json:"mapping"`
 }
 
 type ExportRequest struct {
