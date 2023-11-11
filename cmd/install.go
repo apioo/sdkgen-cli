@@ -66,7 +66,7 @@ var installCmd = &cobra.Command{
 
 			var outputDir = filepath.Join(cwd, pkg.Target)
 
-			Generate(client, schema.Type, spec, outputDir, pkg.Namespace, pkg.BaseUrl, sdkClient.Remove)
+			Generate(client, schema.Type, spec, outputDir, pkg.Namespace, pkg.BaseUrl, pkg.Mapping, sdkClient.Remove)
 
 			resolved[name] = json.RawMessage(spec)
 

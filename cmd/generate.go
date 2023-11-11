@@ -41,8 +41,9 @@ var generateCmd = &cobra.Command{
 		}
 
 		var targetDir = filepath.Join(cwd, outputDir)
+		var mapping = make(map[string]string)
 
-		Generate(client, generatorType, byteValue, targetDir, sdkClient.Namespace, sdkClient.BaseUrl, sdkClient.Remove)
+		Generate(client, generatorType, byteValue, targetDir, sdkClient.Namespace, sdkClient.BaseUrl, mapping, sdkClient.Remove)
 
 		fmt.Println("Generation successful!")
 		os.Exit(0)
