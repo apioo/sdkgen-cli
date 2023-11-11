@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 func init() {
@@ -19,6 +20,11 @@ var generateCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(3),
 	Run: func(cmd *cobra.Command, args []string) {
 		var client = sdkClient.GetClient()
+
+		cwd, err := os.Getwd()
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		var generatorType = args[0]
 		var schemaFile = args[1]
@@ -34,7 +40,9 @@ var generateCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		Generate(client, generatorType, byteValue, outputDir, sdkClient.Namespace, sdkClient.BaseUrl)
+		var targetDir = filepath.Join(cwd, outputDir)
+
+		Generate(client, generatorType, byteValue, targetDir, sdkClient.Namespace, sdkClient.BaseUrl, sdkClient.Remove)
 
 		fmt.Println("Generation successful!")
 		os.Exit(0)

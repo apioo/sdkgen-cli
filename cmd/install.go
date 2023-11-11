@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 func init() {
@@ -19,7 +20,13 @@ var installCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var client = sdkClient.GetClient()
 
-		sdkgenFile, err := readFile("./sdkgen.json")
+		cwd, err := os.Getwd()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		var sdkgenFilePath = filepath.Join(cwd, "sdkgen.json")
+		sdkgenFile, err := readFile(sdkgenFilePath)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -31,7 +38,8 @@ var installCmd = &cobra.Command{
 		}
 
 		var lock = make(map[string]interface{})
-		sdkgenLock, err := readFile("./sdkgen.lock")
+		var sdkgenLockPath = filepath.Join(cwd, "sdkgen.lock")
+		sdkgenLock, err := readFile(sdkgenLockPath)
 		if err == nil {
 			err = json.Unmarshal(sdkgenLock, &lock)
 			if err != nil {
@@ -56,7 +64,9 @@ var installCmd = &cobra.Command{
 				hasChanged = true
 			}
 
-			Generate(client, schema.Type, spec, pkg.Target, pkg.Namespace, pkg.BaseUrl)
+			var outputDir = filepath.Join(cwd, pkg.Target)
+
+			Generate(client, schema.Type, spec, outputDir, pkg.Namespace, pkg.BaseUrl, sdkClient.Remove)
 
 			resolved[name] = json.RawMessage(spec)
 
@@ -69,7 +79,7 @@ var installCmd = &cobra.Command{
 				log.Fatal(err)
 			}
 
-			err = os.WriteFile("./sdkgen.lock", lockContent, 0644)
+			err = os.WriteFile(sdkgenLockPath, lockContent, 0644)
 			if err != nil {
 				log.Fatal(err)
 			}

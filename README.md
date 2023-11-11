@@ -12,6 +12,22 @@ by yourself with:
 
 > go build
 
+## Install
+
+The install command reads the `sdkgen.json` file from the current working directory and generates all defined
+dependencies. Take a look at the [schema](https://sdkgen.app/schema) page to see the structure of the
+`sdkgen.json` schema file. The install comand generates a `sdkgen.lock` file where all resolved specifications are
+placed, so that subsequent install comand calls always use the same specification.
+
+> sdkgen install --client-id="[user]" --client-secret="[password]"
+
+## Update
+
+The update command works almost identical to the install command except that it does not read the
+`sdkgen.lock` file and always fetches the latest specification.
+
+> sdkgen update --client-id="[user]" --client-secret="[password]"
+
 ## Generate
 
 The generate command expects as first type a type which SDK should be generated i.e. `client-typescript`.

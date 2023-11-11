@@ -12,6 +12,7 @@ type SdkClient struct {
 	ClientSecret string
 	Namespace    string
 	BaseUrl      string
+	Remove       bool
 }
 
 func (sdkClient *SdkClient) GetClient() *sdk.Client {

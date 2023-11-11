@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 func init() {
@@ -19,7 +20,13 @@ var updateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var client = sdkClient.GetClient()
 
-		sdkgenFile, err := readFile("./sdkgen.json")
+		cwd, err := os.Getwd()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		var sdkgenFilePath = filepath.Join(cwd, "sdkgen.json")
+		sdkgenFile, err := readFile(sdkgenFilePath)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -35,7 +42,9 @@ var updateCmd = &cobra.Command{
 		for name, pkg := range schema.Require {
 			spec := Resolve(name, pkg.Version)
 
-			Generate(client, schema.Type, spec, pkg.Target, pkg.Namespace, pkg.BaseUrl)
+			var outputDir = filepath.Join(cwd, pkg.Target)
+
+			Generate(client, schema.Type, spec, outputDir, pkg.Namespace, pkg.BaseUrl, sdkClient.Remove)
 
 			resolved[name] = json.RawMessage(spec)
 
@@ -47,7 +56,8 @@ var updateCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		err = os.WriteFile("./sdkgen.lock", lockContent, 0644)
+		var sdkgenLockPath = filepath.Join(cwd, "sdkgen.lock")
+		err = os.WriteFile(sdkgenLockPath, lockContent, 0644)
 		if err != nil {
 			log.Fatal(err)
 		}

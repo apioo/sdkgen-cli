@@ -19,6 +19,7 @@ var sdkClient = SdkClient{
 	ClientSecret: "",
 	Namespace:    "",
 	BaseUrl:      "",
+	Remove:       false,
 }
 
 func init() {
@@ -27,6 +28,10 @@ func init() {
 
 	generateCmd.PersistentFlags().StringVar(&sdkClient.Namespace, "namespace", "", "Optional a namespace for the generated code.")
 	generateCmd.PersistentFlags().StringVar(&sdkClient.BaseUrl, "base-url", "", "Optional a base url for your SDK.")
+
+	generateCmd.PersistentFlags().BoolVar(&sdkClient.Remove, "remove", false, "Whether to remove all existing files at the target directory before generation.")
+	installCmd.PersistentFlags().BoolVar(&sdkClient.Remove, "remove", false, "Whether to remove all existing files at the target directory before generation.")
+	updateCmd.PersistentFlags().BoolVar(&sdkClient.Remove, "remove", false, "Whether to remove all existing files at the target directory before generation.")
 }
 
 func Execute() {

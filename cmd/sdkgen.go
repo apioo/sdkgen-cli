@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"regexp"
 	"strings"
 )
@@ -31,7 +32,7 @@ func Resolve(name string, version string) []byte {
 		}
 
 		if res.StatusCode != 200 {
-			log.Fatal("Could not export specification")
+			log.Fatal("TypeHub: Could not export specification")
 		}
 
 		resBody, err := io.ReadAll(res.Body)
@@ -50,7 +51,7 @@ func Resolve(name string, version string) []byte {
 		}
 
 		if res.StatusCode != 200 {
-			log.Fatal("")
+			log.Fatal("Url " + name + " returned a non-successful response code")
 		}
 
 		resBody, err := io.ReadAll(res.Body)
@@ -74,14 +75,14 @@ func Resolve(name string, version string) []byte {
 	}
 }
 
-func Generate(client *sdk.Client, generatorType string, schema []byte, outputDir string, namespace string, baseUrl string) {
+func Generate(client *sdk.Client, generatorType string, schema []byte, outputDir string, namespace string, baseUrl string, remove bool) {
 	stat, err := os.Stat(outputDir)
 	if err != nil {
 		log.Fatal("Provided output directory does not exist")
 	}
 
 	if !stat.IsDir() {
-		log.Fatal("Provided output directory does not exist")
+		log.Fatal("Provided output directory is not a directory")
 	}
 
 	payload := sdk.Passthru{}
@@ -93,14 +94,18 @@ func Generate(client *sdk.Client, generatorType string, schema []byte, outputDir
 	}
 
 	if response.Chunks != nil {
+		if remove {
+			deleteAllFilesInFolder(outputDir)
+		}
+
 		for file, code := range response.Chunks {
-			err := os.WriteFile(outputDir+"/"+file, []byte(code), 0644)
+			err := os.WriteFile(filepath.Join(outputDir, file), []byte(code), 0644)
 			if err != nil {
 				log.Fatal(err)
 			}
 		}
 	} else if response.Output != "" {
-		err := os.WriteFile(outputDir+"/output", []byte(response.Output), 0644)
+		err := os.WriteFile(filepath.Join(outputDir, "output"), []byte(response.Output), 0644)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -119,6 +124,33 @@ func readFile(path string) ([]byte, error) {
 	}
 
 	return byteValue, nil
+}
+
+func deleteAllFilesInFolder(path string) {
+	dir, err := os.Open(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	files, err := dir.ReadDir(0)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, file := range files {
+		if file.IsDir() {
+			continue
+		}
+
+		if strings.HasPrefix(file.Name(), ".") {
+			continue
+		}
+
+		err = os.Remove(filepath.Join(path, file.Name()))
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 }
 
 type Schema struct {
