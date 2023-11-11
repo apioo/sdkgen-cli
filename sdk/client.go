@@ -31,12 +31,13 @@ func (client *Client) Meta() *MetaTag {
 }
 
 // Generate Generates a new SDK from the provided input
-func (client *Client) Generate(_type string, payload Passthru, namespace string, baseUrl string) (GeneratorResponse, error) {
+func (client *Client) Generate(_type string, payload Passthru, namespace string, config string, baseUrl string) (GeneratorResponse, error) {
 	pathParams := make(map[string]interface{})
 	pathParams["type"] = _type
 
 	queryParams := make(map[string]interface{})
 	queryParams["namespace"] = namespace
+	queryParams["config"] = config
 	queryParams["baseUrl"] = baseUrl
 
 	u, err := url.Parse(client.internal.Parser.Url("/generate/:type", pathParams))
