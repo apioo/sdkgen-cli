@@ -32,7 +32,7 @@ jobs:
         run: docker-compose up
       - name: Move
         working-directory: .
-        run: mv ./output/*.cs ./integration/csharp/
+        run: cp ./output/*.cs ./integration/csharp/
       - name: Install dependencies
         run: dotnet restore
       - name: Build
