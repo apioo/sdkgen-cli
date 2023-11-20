@@ -39,8 +39,8 @@ class Program
             throw new Exception("Test assertGetEntries failed: ItemsPerPage, got: " + todos.ItemsPerPage);
         }
 
-        if (todos.Entry.Length != 2) {
-            throw new Exception("Test assertGetEntries failed: Entry, got: " + todos.Entry.Length);
+        if (todos.Entry.Count != 2) {
+            throw new Exception("Test assertGetEntries failed: Entry, got: " + todos.Entry.Count);
         }
 
         if (todos.Entry[0].Title != "foo") {
