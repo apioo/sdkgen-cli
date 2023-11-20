@@ -22,15 +22,15 @@ jobs:
           dotnet-version: '6.0.x'
       - name: Init mockserver
         run: "curl -X PUT http://127.0.0.1:1080/mockserver/expectation -H 'Content-Type: application/json' -d @./../../mockserver/initializerJson.json"
+      - name: Move sdkgen.json file
+        run: mv ./sdkgen.json ../../output/
       - name: Generate
         env:
-          SDKGEN_TYPE: client-csharp
           SDKGEN_CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
           SDKGEN_CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
-          SDKGEN_NAMESPACE: ""
         run: cd ../../ && docker-compose up
       - name: Move
-        run: mv ../../output/*.cs .
+        run: mv ../../output/sdk/*.cs .
       - name: Install dependencies
         run: dotnet restore
       - name: Build
@@ -56,15 +56,15 @@ jobs:
           go-version: '1.20'
       - name: Init mockserver
         run: "curl -X PUT http://127.0.0.1:1080/mockserver/expectation -H 'Content-Type: application/json' -d @./../../mockserver/initializerJson.json"
+      - name: Move sdkgen.json file
+        run: mv ./sdkgen.json ../../output/
       - name: Generate
         env:
-          SDKGEN_TYPE: client-go
           SDKGEN_CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
           SDKGEN_CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
-          SDKGEN_NAMESPACE: "main"
         run: cd ../../ && docker-compose up
       - name: Move
-        run: mv ../../output/*.go .
+        run: mv ../../output/sdk/*.go .
       - name: Build
         run: go build -v
       - name: Run
@@ -89,17 +89,15 @@ jobs:
           distribution: 'temurin'
       - name: Init mockserver
         run: "curl -X PUT http://127.0.0.1:1080/mockserver/expectation -H 'Content-Type: application/json' -d @./../../mockserver/initializerJson.json"
-      - name: Debug
-        run: docker logs "${{ job.services.mock.id }}"
+      - name: Move sdkgen.json file
+        run: mv ./sdkgen.json ../../output/
       - name: Generate
         env:
-          SDKGEN_TYPE: client-java
           SDKGEN_CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
           SDKGEN_CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
-          SDKGEN_NAMESPACE: "org.typeapi.generator"
         run: cd ../../ && docker-compose up
       - name: Move
-        run: mv ../../output/*.java .
+        run: mv ../../output/sdk/*.java .
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
       - name: Run
@@ -125,15 +123,15 @@ jobs:
           coverage: none
       - name: Init mockserver
         run: "curl -X PUT http://127.0.0.1:1080/mockserver/expectation -H 'Content-Type: application/json' -d @./../../mockserver/initializerJson.json"
+      - name: Move sdkgen.json file
+        run: mv ./sdkgen.json ../../output/
       - name: Generate
         env:
-          SDKGEN_TYPE: client-php
           SDKGEN_CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
           SDKGEN_CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
-          SDKGEN_NAMESPACE: "SDK"
         run: cd ../../ && docker-compose up
       - name: Move
-        run: mv ../../output/*.php .
+        run: mv ../../output/sdk/*.php .
       - name: Composer install
         run: composer install --no-interaction --no-ansi --no-progress
       - name: Run

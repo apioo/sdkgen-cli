@@ -1,0 +1,8 @@
+{
+  "type": "client-python",
+  "require": {
+    "./typeapi.json": {
+      "target": "./sdk"
+    }
+  }
+}

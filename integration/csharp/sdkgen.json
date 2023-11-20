@@ -1,0 +1,8 @@
+{
+  "type": "client-csharp",
+  "require": {
+    "./typeapi.json": {
+      "target": "./sdk"
+    }
+  }
+}

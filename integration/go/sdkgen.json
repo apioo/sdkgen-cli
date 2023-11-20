@@ -1,0 +1,9 @@
+{
+  "type": "client-go",
+  "require": {
+    "./typeapi.json": {
+      "target": "./sdk",
+      "namespace": "main"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "client-java",
+  "require": {
+    "./typeapi.json": {
+      "target": "./sdk",
+      "namespace": "org.typeapi.generator"
+    }
+  }
+}
