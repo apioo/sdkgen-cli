@@ -2,7 +2,7 @@
   "type": "client-php",
   "require": {
     "./typeapi.json": {
-      "target": "./sdk",
+      "target": "/usr/src/sdkgen/output",
       "namespace": "SDK"
     }
   }

@@ -2,7 +2,7 @@
   "type": "client-java",
   "require": {
     "./typeapi.json": {
-      "target": "./sdk",
+      "target": "/usr/src/sdkgen/output",
       "namespace": "org.typeapi.generator"
     }
   }
