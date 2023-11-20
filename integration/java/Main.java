@@ -41,12 +41,12 @@ public class Main {
             throw new RuntimeException("Test assertGetEntries failed: Entry, got: " + todos.getEntry().size());
         }
 
-        if (!todos.getEntry()[0].getTitle().equals("foo")) {
-            throw new RuntimeException("Test assertGetEntries failed: Entry.0.Title, got: " + todos.getEntry()[0].getTitle());
+        if (!todos.getEntry().get(0).getTitle().equals("foo")) {
+            throw new RuntimeException("Test assertGetEntries failed: Entry.0.Title, got: " + todos.getEntry().get(0).getTitle());
         }
 
-        if (!todos.getEntry()[1].getTitle().equals("bar")) {
-            throw new RuntimeException("Test assertGetEntries failed: Entry.1.Title, got: " + todos.getEntry()[1].getTitle());
+        if (!todos.getEntry().get(1).getTitle().equals("bar")) {
+            throw new RuntimeException("Test assertGetEntries failed: Entry.1.Title, got: " + todos.getEntry().get(1).getTitle());
         }
     }
 
