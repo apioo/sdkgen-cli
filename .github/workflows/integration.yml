@@ -25,10 +25,11 @@ jobs:
       - name: Move sdkgen.json file
         run: mv ./sdkgen.json ../../output/
       - name: Generate
+        working-directory: .
         env:
           SDKGEN_CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
           SDKGEN_CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
-        run: cd ../../ && docker-compose up
+        run: docker-compose up
       - name: Move
         run: mv ../../output/sdk/*.cs .
       - name: Install dependencies
