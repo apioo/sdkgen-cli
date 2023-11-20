@@ -65,6 +65,6 @@ To use the docker file you need to set the fitting credentials at the `docker-co
 
 > docker-compose up
 
-This builds the docker image and executes the `sdkgen install` command, it reads the `sdkgen.json` from the `./output`
-folder and writes the generated code to the `./output/sdk` folder. You can also directly use the
+This builds the docker image and executes the `sdkgen install` command, it reads the `sdkgen.json` from the `./input`
+folder and writes the generated code to the `./output` folder. You can also directly use the
 `apiootech/sdkgen` [docker image](https://hub.docker.com/r/apiootech/sdkgen).
