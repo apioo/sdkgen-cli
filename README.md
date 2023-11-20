@@ -14,7 +14,7 @@ by yourself with:
 
 ## Install
 
-The install command reads the `sdkgen.json` file from the current working directory and generates all defined
+The `install` command reads the `sdkgen.json` file from the current working directory and generates all defined
 dependencies. Take a look at the [schema](https://sdkgen.app/schema) page to see the structure of the
 `sdkgen.json` schema file. The install comand generates a `sdkgen.lock` file where all resolved specifications are
 placed, so that subsequent install comand calls always use the same specification.
@@ -23,7 +23,7 @@ placed, so that subsequent install comand calls always use the same specificatio
 
 ## Update
 
-The update command works almost identical to the install command except that it does not read the
+The `update` command works almost identical to the install command except that it does not read the
 `sdkgen.lock` file and always fetches the latest specification.
 
 > sdkgen update --client-id="[user]" --client-secret="[password]"
@@ -65,5 +65,6 @@ To use the docker file you need to set the fitting credentials at the `docker-co
 
 > docker-compose up
 
-This builds the docker image and reads the `./output/typeapi.json` specification and writes the generated code also to
-the `./output` dir. You can also directly use the `apiootech/sdkgen` [docker image](https://hub.docker.com/r/apiootech/sdkgen).
+This builds the docker image and executes the `sdkgen install` command, it reads the `sdkgen.json` from the `./output`
+folder and writes the generated code to the `./output/sdk` folder. You can also directly use the
+`apiootech/sdkgen` [docker image](https://hub.docker.com/r/apiootech/sdkgen).
