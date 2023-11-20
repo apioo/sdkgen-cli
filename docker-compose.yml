@@ -6,4 +6,5 @@ services:
       SDKGEN_CLIENT_ID: "${SDKGEN_CLIENT_ID}"
       SDKGEN_CLIENT_SECRET: "${SDKGEN_CLIENT_SECRET}"
     volumes:
+      - ./input:/usr/src/sdkgen/input
       - ./output:/usr/src/sdkgen/output
