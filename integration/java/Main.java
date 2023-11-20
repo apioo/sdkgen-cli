@@ -37,8 +37,8 @@ public class Main {
             throw new RuntimeException("Test assertGetEntries failed: ItemsPerPage, got: " + todos.getItemsPerPage());
         }
 
-        if (todos.getEntry().length != 2) {
-            throw new RuntimeException("Test assertGetEntries failed: Entry, got: " + todos.getEntry().length);
+        if (todos.getEntry().size() != 2) {
+            throw new RuntimeException("Test assertGetEntries failed: Entry, got: " + todos.getEntry().size());
         }
 
         if (!todos.getEntry()[0].getTitle().equals("foo")) {
