@@ -2,7 +2,7 @@
   "type": "client-python",
   "require": {
     "./typeapi.json": {
-      "target": "/usr/src/sdkgen/output"
+      "target": "./../output"
     }
   }
 }

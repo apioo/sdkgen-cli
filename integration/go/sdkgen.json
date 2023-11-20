@@ -2,7 +2,7 @@
   "type": "client-go",
   "require": {
     "./typeapi.json": {
-      "target": "/usr/src/sdkgen/output",
+      "target": "./../output",
       "namespace": "main"
     }
   }
