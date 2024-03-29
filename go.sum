@@ -2,6 +2,8 @@ github.com/apioo/sdkgen-go v1.0.0 h1:B03lOUYmhYgIITbB1ry+4/DDTNf+cqSnyAR9/Tll9XY
 github.com/apioo/sdkgen-go v1.0.0/go.mod h1:S0fw3foB73DKaffWRrhehaGaluMdl2RdQ03qI6shHJ4=
 github.com/apioo/sdkgen-go v1.0.2 h1:gfdabWfhBG1IYOyT7HU6Vv2ge9P16JKVjOYr6ArVjXs=
 github.com/apioo/sdkgen-go v1.0.2/go.mod h1:S0fw3foB73DKaffWRrhehaGaluMdl2RdQ03qI6shHJ4=
+github.com/apioo/sdkgen-go v1.0.3 h1:Ni5u7KOzkTpCyHVuA8wZr8uhriIgKukH0KOfKkFhc0o=
+github.com/apioo/sdkgen-go v1.0.3/go.mod h1:S0fw3foB73DKaffWRrhehaGaluMdl2RdQ03qI6shHJ4=
 github.com/cpuguy83/go-md2man/v2 v2.0.2/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/cpuguy83/go-md2man/v2 v2.0.3/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
