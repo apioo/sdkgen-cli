@@ -59,7 +59,7 @@ class Program
 
         Response message = await client.Test().Insert(payload);
 
-        if (!message.Success) {
+        if (!(message.Success ?? false)) {
             throw new Exception("Test assertInsert failed: Success, got: " + message.Success);
         }
 
