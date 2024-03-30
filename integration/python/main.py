@@ -52,7 +52,7 @@ def assert_throw_exception(client: Client):
 
         raise Exception("Test assertThrowException failed: Expected an error")
     except ErrorException as e:
-        if e.payload.message != "Error":
+        if e.get_payload().message != "Error":
             raise Exception("Test assertThrowException failed: Error message does not match, got: " + e.payload.message)
 
 
