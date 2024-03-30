@@ -1,1 +1,2 @@
 sdkgen-client
+requests
