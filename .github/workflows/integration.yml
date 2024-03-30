@@ -144,3 +144,37 @@ jobs:
         run: composer install --no-interaction --no-ansi --no-progress
       - name: Run
         run: php main.php
+  python:
+    name: Python
+    runs-on: ubuntu-latest
+    services:
+      mock:
+        image: mockserver/mockserver
+        ports:
+          - 1080:1080
+    defaults:
+      run:
+        working-directory: integration/python
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Init mockserver
+        run: "curl -X PUT http://127.0.0.1:1080/mockserver/expectation -H 'Content-Type: application/json' -d @./../../mockserver/initializerJson.json"
+      - name: Move sdkgen.json file
+        run: mv ./sdkgen.json ../../input/
+      - name: Generate
+        working-directory: .
+        env:
+          SDKGEN_CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
+          SDKGEN_CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
+        run: docker-compose up
+      - name: Move
+        working-directory: .
+        run: cp ./output/*.py ./integration/python/
+      - name: PIP install
+        run: pip install -r requirements.txt
+      - name: Run
+        run: python main.py
