@@ -34,7 +34,8 @@ def assert_get_entries(client: Client):
 
 
 def assert_insert(client: Client):
-    payload = Todo("baz")
+    payload = Todo()
+    payload.title = "baz"
 
     message = client.test().insert(payload)
 
