@@ -171,9 +171,11 @@ jobs:
           SDKGEN_CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
           SDKGEN_CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
         run: docker-compose up
+      - name: Create sdk dir
+        run: mkdir sdk
       - name: Move
         working-directory: .
-        run: cp ./output/*.py ./integration/python/
+        run: cp ./output/*.py ./integration/python/sdk
       - name: PIP install
         run: pip install -r requirements.txt
       - name: Run

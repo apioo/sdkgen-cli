@@ -1,9 +1,8 @@
 from sdkgen import Anonymous
 
-from client import Client
-from error_exception import ErrorException
-from todo import Todo
-
+from sdk.client import Client
+from sdk.error_exception import ErrorException
+from sdk.todo import Todo
 
 def assert_get_hello(client: Client):
     message = client.test().get_hello()
