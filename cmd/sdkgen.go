@@ -15,7 +15,7 @@ import (
 )
 
 func Resolve(name string, version string) []byte {
-	match, _ := regexp.MatchString("^([A-Za-z0-9]+)/([A-Za-z0-9]+)$", name)
+	match, _ := regexp.MatchString("^([a-zA-Z0-9-_.]+)/([A-Za-z0-9_]+)$", name)
 	if match {
 		var payload = ExportRequest{
 			Format:  "spec-typeapi",
