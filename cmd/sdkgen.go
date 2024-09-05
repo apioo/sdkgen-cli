@@ -12,6 +12,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+	"time"
 )
 
 func Resolve(name string, version string) []byte {
@@ -99,10 +100,7 @@ func Generate(client *sdk.Client, generatorType string, schema []byte, outputDir
 
 	var base64Config = base64.StdEncoding.EncodeToString(jsonConfig)
 
-	response, err := client.Generate(generatorType, payload, namespace, base64Config, baseUrl)
-	if err != nil {
-		log.Fatal(err)
-	}
+	response := tryToGenerate(client, generatorType, payload, namespace, base64Config, baseUrl, 0)
 
 	if response.Chunks != nil {
 		if remove {
@@ -121,6 +119,21 @@ func Generate(client *sdk.Client, generatorType string, schema []byte, outputDir
 			log.Fatal(err)
 		}
 	}
+}
+
+func tryToGenerate(client *sdk.Client, generatorType string, payload sdk.Passthru, namespace string, base64Config string, baseUrl string, retryCount int) sdk.GeneratorResponse {
+	response, err := client.Generate(generatorType, payload, namespace, base64Config, baseUrl)
+	if err != nil {
+		if retryCount > 3 {
+			log.Fatal(err)
+		}
+
+		time.Sleep(2 * time.Second)
+
+		return tryToGenerate(client, generatorType, payload, namespace, base64Config, baseUrl, retryCount+1)
+	}
+
+	return response
 }
 
 func readFile(path string) ([]byte, error) {
