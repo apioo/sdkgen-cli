@@ -86,10 +86,7 @@
     },
     "httpResponse": {
       "statusCode": 200,
-      "body": {
-        "type": "BINARY",
-        "base64Bytes": "Zm9vYmFy"
-      }
+      "body": "foobar"
     }
   },
   {
