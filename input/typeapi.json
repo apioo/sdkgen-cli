@@ -70,6 +70,71 @@
           "$ref": "Error"
         }
       }]
+    },
+    "test.binary": {
+      "method": "POST",
+      "path": "/binary",
+      "arguments": {
+        "payload": {
+          "in": "body",
+          "contentType": "application/octet-stream"
+        }
+      },
+      "return": {
+        "contentType": "application/octet-stream"
+      }
+    },
+    "test.form": {
+      "method": "POST",
+      "path": "/form",
+      "arguments": {
+        "payload": {
+          "in": "body",
+          "contentType": "application/x-www-form-urlencoded"
+        }
+      },
+      "return": {
+        "contentType": "application/x-www-form-urlencoded"
+      }
+    },
+    "test.json": {
+      "method": "POST",
+      "path": "/json",
+      "arguments": {
+        "payload": {
+          "in": "body",
+          "contentType": "application/json"
+        }
+      },
+      "return": {
+        "contentType": "application/json"
+      }
+    },
+    "test.text": {
+      "method": "POST",
+      "path": "/text",
+      "arguments": {
+        "payload": {
+          "in": "body",
+          "contentType": "text/plain"
+        }
+      },
+      "return": {
+        "contentType": "text/plain"
+      }
+    },
+    "test.xml": {
+      "method": "POST",
+      "path": "/xml",
+      "arguments": {
+        "payload": {
+          "in": "body",
+          "contentType": "application/xml"
+        }
+      },
+      "return": {
+        "contentType": "application/xml"
+      }
     }
   },
   "definitions": {

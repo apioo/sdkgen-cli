@@ -16,8 +16,12 @@
       "method": "GET",
       "path": "/todo",
       "queryStringParameters": {
-        "startIndex": ["0"],
-        "count": ["16"]
+        "startIndex": [
+          "0"
+        ],
+        "count": [
+          "16"
+        ]
       }
     },
     "httpResponse": {
@@ -26,11 +30,14 @@
         "totalResults": 4,
         "startIndex": 0,
         "itemsPerPage": 16,
-        "entry": [{
-          "title": "foo"
-        }, {
-          "title": "bar"
-        }]
+        "entry": [
+          {
+            "title": "foo"
+          },
+          {
+            "title": "bar"
+          }
+        ]
       }
     }
   },
@@ -60,6 +67,118 @@
       "body": {
         "success": false,
         "message": "Error"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/binary",
+      "headers": {
+        "Content-Type": [
+          "application/octet-stream"
+        ]
+      },
+      "body": {
+        "type": "BINARY",
+        "base64Bytes": "Zm9vYmFy"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "type": "BINARY",
+        "base64Bytes": "Zm9vYmFy"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/form",
+      "headers": {
+        "Content-Type": [
+          "application/x-www-form-urlencoded"
+        ]
+      },
+      "body": {
+        "type": "PARAMETERS",
+        "parameters": {
+          "foo": "bar"
+        }
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "type": "PARAMETERS",
+        "parameters": {
+          "foo": "bar"
+        }
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/json",
+      "headers": {
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "foo": "bar"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "foo": "bar"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/text",
+      "headers": {
+        "Content-Type": [
+          "text/plain"
+        ]
+      },
+      "body": {
+        "type" : "STRING",
+        "xml": "foobar"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "type" : "STRING",
+        "xml": "foobar"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/xml",
+      "headers": {
+        "Content-Type": [
+          "application/xml"
+        ]
+      },
+      "body": {
+        "type" : "XML",
+        "xml": "<foo>bar</foo>"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "type" : "XML",
+        "xml": "<foo>bar</foo>"
       }
     }
   }

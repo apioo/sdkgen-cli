@@ -12,6 +12,11 @@ class Program
         await AssertGetEntries(client);
         await AssertInsert(client);
         await AssertThrowException(client);
+        await AssertBinary(client);
+        await AssertForm(client);
+        await AssertJson(client);
+        await AssertText(client);
+        await AssertXml(client);
     }
 
     private static async Task AssertGetHello(Client client)
@@ -78,6 +83,67 @@ class Program
             if (e.Payload.Message != "Error") {
                 throw new Exception("Test assertThrowException failed: Error message does not match, got: " + e.Payload.Message);
             }
+        }
+    }
+
+    private static async Task AssertBinary(Client client)
+    {
+        var payload = new byte[] {0x66, 0x6F, 0x6F, 0x62, 0x61, 0x72};
+
+        var response = await client.Test().Binary(payload);
+
+        if (payload != response) {
+            throw new Exception("Test AssertBinary failed");
+        }
+    }
+
+    private static async Task AssertForm(Client client)
+    {
+        var payload = new System.Collections.Specialized.NameValueCollection
+        {
+            { "foo", "bar" }
+        };
+
+        var response = await client.Test().Form(payload);
+
+        if (payload != response) {
+            throw new Exception("Test AssertForm failed");
+        }
+    }
+
+    private static async Task AssertJson(Client client)
+    {
+        var payload = new Dictionary<string, string>
+        {
+            { "string", "bar" }
+        };
+
+        var response = await client.Test().Json(payload);
+
+        if (payload != response) {
+            throw new Exception("Test AssertJson failed");
+        }
+    }
+
+    private static async Task AssertText(Client client)
+    {
+        var payload = "foobar";
+
+        var response = await client.Test().Text(payload);
+
+        if (payload != response) {
+            throw new Exception("Test AssertText failed");
+        }
+    }
+
+    private static async Task AssertXml(Client client)
+    {
+        var payload = "<foo>bar</foo>";
+
+        var response = await client.Test().Xml(payload);
+
+        if (payload != response) {
+            throw new Exception("Test AssertXml failed");
         }
     }
 }
