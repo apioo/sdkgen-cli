@@ -1,0 +1,8 @@
+{
+  "type": "client-typescript",
+  "require": {
+    "./typeapi.json": {
+      "target": "./../output"
+    }
+  }
+}

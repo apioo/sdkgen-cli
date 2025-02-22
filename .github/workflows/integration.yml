@@ -180,3 +180,38 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run
         run: python main.py
+  typescript:
+    name: TypeScript
+    runs-on: ubuntu-latest
+    services:
+      mock:
+        image: mockserver/mockserver
+        ports:
+          - 1080:1080
+    defaults:
+      run:
+        working-directory: integration/typescript
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - name: Init mockserver
+        run: "curl -X PUT http://127.0.0.1:1080/mockserver/expectation -H 'Content-Type: application/json' -d @./../../mockserver/initializerJson.json"
+      - name: Move sdkgen.json file
+        run: mv ./sdkgen.json ../../input/
+      - name: Generate
+        working-directory: .
+        env:
+          SDKGEN_CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
+          SDKGEN_CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
+        run: docker compose up
+      - name: Create sdk dir
+        run: mkdir sdk
+      - name: Move
+        working-directory: .
+        run: cp ./output/*.ts ./integration/typescript
+      - run: npm install
+      - run: npm run build
+      - name: Run
+        run: cd dist && node main.js

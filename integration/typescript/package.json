@@ -1,0 +1,16 @@
+{
+  "name": "fusio-sdk",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "sdkgen-client": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "typescript": "^4.3"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "lib": ["es2020", "dom"],
+    "strict": true,
+    "moduleResolution": "node",
+    "outDir": "dist"
+  },
+  "files": [
+    "Client.ts",
+    "Error.ts",
+    "ErrorException.ts",
+    "HelloWorld.ts",
+    "main.ts",
+    "Response.ts",
+    "TestTag.ts",
+    "Todo.ts",
+    "Todos.ts",
+  ]
+}
