@@ -2,9 +2,17 @@ package org.typeapi.generator;
 
 import app.sdkgen.client.Credentials.Anonymous;
 import app.sdkgen.client.Exception.ClientException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.hc.core5.http.NameValuePair;
+import org.apache.hc.core5.http.message.BasicNameValuePair;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws ClientException {
+    public static void main(String[] args) throws ClientException, JsonProcessingException {
         Anonymous credentials = new Anonymous();
         Client client = new Client("http://127.0.0.1:1080", credentials);
 
@@ -12,6 +20,11 @@ public class Main {
         assertGetEntries(client);
         assertInsert(client);
         assertThrowException(client);
+        assertBinary(client);
+        assertForm(client);
+        assertJson(client);
+        assertText(client);
+        assertXml(client);
     }
 
     private static void assertGetHello(Client client) throws ClientException {
@@ -75,6 +88,62 @@ public class Main {
             if (!e.getPayload().getMessage().equals("Error")) {
                 throw new RuntimeException("Test assertThrowException failed: Error message does not match, got: " + e.getPayload().getMessage());
             }
+        }
+    }
+
+    private static void assertBinary(Client client) throws ClientException
+    {
+        byte[] payload = {0x66, 0x6F, 0x6F, 0x62, 0x61, 0x72};
+
+        var response = client.test().binary(payload);
+
+        if (!Arrays.equals(payload, response)) {
+            throw new RuntimeException("Test assertBinary failed");
+        }
+    }
+
+    private static void assertForm(Client client) throws ClientException
+    {
+        List<NameValuePair> payload = List.of(new BasicNameValuePair("foo", "bar"));
+
+        var response = client.test().form(payload);
+
+        if (!response.get(0).getName().equals("foo") || !response.get(0).getValue().equals("bar")) {
+            throw new RuntimeException("Test assertForm failed");
+        }
+    }
+
+    private static void assertJson(Client client) throws ClientException, JsonProcessingException {
+        HashMap<String, String> payload = new HashMap<>();
+        payload.put("foo", "bar");
+
+        var response = client.test().json(payload);
+
+        var objectMapper = new ObjectMapper();
+        if (!objectMapper.writeValueAsString(payload).equals(objectMapper.writeValueAsString(response))) {
+            throw new RuntimeException("Test assertJson failed");
+        }
+    }
+
+    private static void assertText(Client client) throws ClientException
+    {
+        String payload = "foobar";
+
+        var response = client.test().text(payload);
+
+        if (!payload.equals(response)) {
+            throw new RuntimeException("Test assertText failed");
+        }
+    }
+
+    private static void assertXml(Client client) throws ClientException
+    {
+        String payload = "<foo>bar</foo>";
+
+        var response = client.test().xml(payload);
+
+        if (!payload.equals(response)) {
+            throw new RuntimeException("Test assertXml failed");
         }
     }
 }
