@@ -86,6 +86,11 @@
     },
     "httpResponse": {
       "statusCode": 200,
+      "headers": {
+        "Content-Type": [
+          "application/octet-stream"
+        ]
+      },
       "body": {
         "type": "BINARY",
         "base64Bytes": "Zm9vYmFy"
@@ -112,6 +117,11 @@
     },
     "httpResponse": {
       "statusCode": 200,
+      "headers": {
+        "Content-Type": [
+          "application/x-www-form-urlencoded"
+        ]
+      },
       "body": "foo=bar"
     }
   },
@@ -130,6 +140,11 @@
     },
     "httpResponse": {
       "statusCode": 200,
+      "headers": {
+        "Content-Type": [
+          "application/json"
+        ]
+      },
       "body": {
         "foo": "bar"
       }
@@ -148,6 +163,11 @@
     },
     "httpResponse": {
       "statusCode": 200,
+      "headers": {
+        "Content-Type": [
+          "text/plain"
+        ]
+      },
       "body": "foobar"
     }
   },
@@ -167,6 +187,11 @@
     },
     "httpResponse": {
       "statusCode": 200,
+      "headers": {
+        "Content-Type": [
+          "application/xml"
+        ]
+      },
       "body": {
         "type": "XML",
         "xml": "<foo>bar</foo>"
