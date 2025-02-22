@@ -144,17 +144,11 @@
           "text/plain"
         ]
       },
-      "body": {
-        "type": "STRING",
-        "xml": "foobar"
-      }
+      "body": "foobar"
     },
     "httpResponse": {
       "statusCode": 200,
-      "body": {
-        "type": "STRING",
-        "xml": "foobar"
-      }
+      "body": "foobar"
     }
   },
   {

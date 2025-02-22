@@ -99,10 +99,8 @@ class Program
 
     private static async Task AssertForm(Client client)
     {
-        var payload = new System.Collections.Specialized.NameValueCollection
-        {
-            { "foo", "bar" }
-        };
+        var payload = new System.Collections.Specialized.NameValueCollection();
+        payload.Add("foo", "bar");
 
         var response = await client.Test().Form(payload);
 
@@ -113,14 +111,12 @@ class Program
 
     private static async Task AssertJson(Client client)
     {
-        var payload = new Dictionary<string, string>
-        {
-            { "string", "bar" }
-        };
+        var payload = new Dictionary<string, string>();
+        payload.Add("foo", "bar");
 
         var response = await client.Test().Json(payload);
 
-        if (payload != response) {
+        if (System.Text.Json.JsonSerializer.Serialize(payload) != System.Text.Json.JsonSerializer.Serialize(response)) {
             throw new Exception("Test AssertJson failed");
         }
     }
