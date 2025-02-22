@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sdkgen.Client" Version="0.1.7" />
+    <PackageReference Include="Sdkgen.Client" Version="2.0.1" />
   </ItemGroup>
 
 </Project>

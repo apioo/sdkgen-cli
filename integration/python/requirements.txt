@@ -1,3 +1,3 @@
-sdkgen-client
+sdkgen-client>=2.0
 requests
 pydantic

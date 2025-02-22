@@ -1,6 +1,6 @@
 {
   "require": {
     "php": ">=8.1",
-    "sdkgen/client": "^1.0"
+    "sdkgen/client": "^2.0"
   }
 }
