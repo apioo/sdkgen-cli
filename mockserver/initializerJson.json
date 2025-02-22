@@ -112,14 +112,7 @@
     },
     "httpResponse": {
       "statusCode": 200,
-      "body": {
-        "type": "PARAMETERS",
-        "parameters": {
-          "foo": [
-            "bar"
-          ]
-        }
-      }
+      "body": "foo=bar"
     }
   },
   {
