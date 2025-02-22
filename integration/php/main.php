@@ -18,6 +18,11 @@ assertGetHello($client);
 assertGetEntries($client);
 assertInsert($client);
 assertThrowException($client);
+assertBinary($client);
+assertForm($client);
+assertJson($client);
+assertText($client);
+assertXml($client);
 
 function assertGetHello(\SDK\Client $client): void
 {
@@ -86,3 +91,57 @@ function assertThrowException(\SDK\Client $client): void
     }
 }
 
+function assertBinary(\SDK\Client $client): void
+{
+    $payload = \GuzzleHttp\Stream\Stream::factory('foobar');
+
+    $response = $client->test()->binary($payload);
+
+    if ($response->getContents() !== 'foobar') {
+        throw new RuntimeException("Test assertBinary failed");
+    }
+}
+
+function assertForm(\SDK\Client $client): void
+{
+    $payload = ['foo' => 'bar'];
+
+    $response = $client->test()->form($payload);
+
+    if ($payload !== $response) {
+        throw new RuntimeException("Test assertForm failed");
+    }
+}
+
+function assertJson(\SDK\Client $client): void
+{
+    $payload = ['foo' => 'bar'];
+
+    $response = $client->test()->json($payload);
+
+    if ($payload !== $response) {
+        throw new RuntimeException("Test assertJson failed");
+    }
+}
+
+function assertText(\SDK\Client $client): void
+{
+    $payload = 'foobar';
+
+    $response = $client->test()->json($payload);
+
+    if ($payload !== $response) {
+        throw new RuntimeException("Test assertText failed");
+    }
+}
+
+function assertXml(\SDK\Client $client): void
+{
+    $payload = '<foo>bar</foo>';
+
+    $response = $client->test()->xml($payload);
+
+    if ($payload !== $response) {
+        throw new RuntimeException("Test assertText failed");
+    }
+}
