@@ -92,7 +92,7 @@ class Program
 
         var response = await client.Test().Binary(payload);
 
-        if (payload != response) {
+        if (!payload.SequenceEqual(response)) {
             throw new Exception("Test AssertBinary failed");
         }
     }
@@ -106,7 +106,7 @@ class Program
 
         var response = await client.Test().Form(payload);
 
-        if (payload != response) {
+        if (!payload.Equals(response)) {
             throw new Exception("Test AssertForm failed");
         }
     }
