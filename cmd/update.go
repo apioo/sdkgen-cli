@@ -37,7 +37,7 @@ var updateCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		var resolved = make(map[string]interface{})
+		var resolved = make(map[string]json.RawMessage)
 
 		for name, pkg := range schema.Require {
 			spec := Resolve(name, pkg.Version)
@@ -46,7 +46,7 @@ var updateCmd = &cobra.Command{
 
 			Generate(client, schema.Type, spec, outputDir, pkg.Namespace, pkg.BaseUrl, pkg.Mapping, sdkClient.Remove)
 
-			resolved[name] = json.RawMessage(spec)
+			resolved[name] = spec
 
 			fmt.Println("* Generated " + name)
 		}

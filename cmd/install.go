@@ -37,7 +37,7 @@ var installCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		var lock = make(map[string]interface{})
+		var lock = make(map[string]json.RawMessage)
 		var sdkgenLockPath = filepath.Join(cwd, "sdkgen.lock")
 		sdkgenLock, err := readFile(sdkgenLockPath)
 		if err == nil {
@@ -47,7 +47,7 @@ var installCmd = &cobra.Command{
 			}
 		}
 
-		var resolved = make(map[string]interface{})
+		var resolved = make(map[string]json.RawMessage)
 		var hasChanged = false
 
 		for name, pkg := range schema.Require {
@@ -68,7 +68,7 @@ var installCmd = &cobra.Command{
 
 			Generate(client, schema.Type, spec, outputDir, pkg.Namespace, pkg.BaseUrl, pkg.Mapping, sdkClient.Remove)
 
-			resolved[name] = json.RawMessage(spec)
+			resolved[name] = spec
 
 			fmt.Println("* Generated " + name)
 		}

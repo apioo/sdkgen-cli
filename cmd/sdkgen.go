@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-func Resolve(name string, version string) []byte {
+func Resolve(name string, version string) json.RawMessage {
 	match, _ := regexp.MatchString("^([a-zA-Z0-9-_.]+)/([A-Za-z0-9_]+)$", name)
 	if match {
 		var payload = ExportRequest{
@@ -43,7 +43,10 @@ func Resolve(name string, version string) []byte {
 		}
 
 		export := ExportResponse{}
-		json.Unmarshal(resBody, &export)
+		err = json.Unmarshal(resBody, &export)
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		return Resolve(export.Href, version)
 	} else if strings.HasPrefix(name, "https://") || strings.HasPrefix(name, "http://") {
@@ -77,7 +80,7 @@ func Resolve(name string, version string) []byte {
 	}
 }
 
-func Generate(client *sdk.Client, generatorType string, schema []byte, outputDir string, namespace string, baseUrl string, mapping map[string]string, remove bool) {
+func Generate(client *sdk.Client, generatorType string, schema json.RawMessage, outputDir string, namespace string, baseUrl string, mapping map[string]string, remove bool) {
 	stat, err := os.Stat(outputDir)
 	if err != nil {
 		log.Fatal("Provided output directory does not exist")
@@ -88,7 +91,7 @@ func Generate(client *sdk.Client, generatorType string, schema []byte, outputDir
 	}
 
 	payload := sdk.Passthru{}
-	payload["raw"] = json.RawMessage(schema)
+	payload["raw"] = schema
 
 	var config = make(map[string]any)
 	config["namespace"] = namespace

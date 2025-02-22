@@ -1,9 +1,9 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/spf13/cobra"
-	"io"
 	"log"
 	"os"
 	"path/filepath"
@@ -30,12 +30,13 @@ var generateCmd = &cobra.Command{
 		var schemaFile = args[1]
 		var outputDir = args[2]
 
-		jsonFile, err := os.Open(schemaFile)
+		jsonFile, err := readFile(schemaFile)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		byteValue, err := io.ReadAll(jsonFile)
+		var schema = json.RawMessage{}
+		err = json.Unmarshal(jsonFile, &schema)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -43,7 +44,7 @@ var generateCmd = &cobra.Command{
 		var targetDir = filepath.Join(cwd, outputDir)
 		var mapping = make(map[string]string)
 
-		Generate(client, generatorType, byteValue, targetDir, sdkClient.Namespace, sdkClient.BaseUrl, mapping, sdkClient.Remove)
+		Generate(client, generatorType, schema, targetDir, sdkClient.Namespace, sdkClient.BaseUrl, mapping, sdkClient.Remove)
 
 		fmt.Println("Generation successful!")
 		os.Exit(0)
