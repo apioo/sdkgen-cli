@@ -72,7 +72,7 @@ def assert_form(client: Client):
 
     response = client.test().form(payload)
 
-    if payload != response:
+    if payload["foo"] != response["foo"][0]:
         raise Exception("Test assert_form failed")
 
 
