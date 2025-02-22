@@ -104,7 +104,9 @@
       "body": {
         "type": "PARAMETERS",
         "parameters": {
-          "foo": "bar"
+          "foo": [
+            "bar"
+          ]
         }
       }
     },
@@ -113,7 +115,9 @@
       "body": {
         "type": "PARAMETERS",
         "parameters": {
-          "foo": "bar"
+          "foo": [
+            "bar"
+          ]
         }
       }
     }
@@ -148,14 +152,14 @@
         ]
       },
       "body": {
-        "type" : "STRING",
+        "type": "STRING",
         "xml": "foobar"
       }
     },
     "httpResponse": {
       "statusCode": 200,
       "body": {
-        "type" : "STRING",
+        "type": "STRING",
         "xml": "foobar"
       }
     }
@@ -170,14 +174,14 @@
         ]
       },
       "body": {
-        "type" : "XML",
+        "type": "XML",
         "xml": "<foo>bar</foo>"
       }
     },
     "httpResponse": {
       "statusCode": 200,
       "body": {
-        "type" : "XML",
+        "type": "XML",
         "xml": "<foo>bar</foo>"
       }
     }
