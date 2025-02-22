@@ -93,7 +93,11 @@ function assertThrowException(\SDK\Client $client): void
 
 function assertBinary(\SDK\Client $client): void
 {
-    $payload = \GuzzleHttp\Stream\Stream::factory('foobar');
+    $handle = fopen('php://memory', 'w+');
+    fwrite($handle, 'foobar');
+    fseek($handle, 0);
+
+    $payload = new \GuzzleHttp\Psr7\Stream($handle);
 
     $response = $client->test()->binary($payload);
 
@@ -119,7 +123,7 @@ function assertJson(\SDK\Client $client): void
 
     $response = $client->test()->json($payload);
 
-    if ($payload !== $response) {
+    if (\json_encode($payload) !== \json_encode($response)) {
         throw new RuntimeException("Test assertJson failed");
     }
 }
@@ -128,7 +132,7 @@ function assertText(\SDK\Client $client): void
 {
     $payload = 'foobar';
 
-    $response = $client->test()->json($payload);
+    $response = $client->test()->text($payload);
 
     if ($payload !== $response) {
         throw new RuntimeException("Test assertText failed");
