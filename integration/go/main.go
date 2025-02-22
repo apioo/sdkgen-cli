@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"errors"
 	"github.com/apioo/sdkgen-go/v2"
 	"log"
+	"net/url"
 	"strconv"
 )
 
@@ -19,6 +22,11 @@ func main() {
 	assertGetEntries(client)
 	assertInsert(client)
 	assertThrowException(client)
+	assertBinary(client)
+	assertForm(client)
+	assertJson(client)
+	assertText(client)
+	assertXml(client)
 }
 
 func assertGetHello(client *Client) {
@@ -96,5 +104,79 @@ func assertThrowException(client *Client) {
 		}
 	default:
 		log.Fatal("Test assertThrowException failed: Error message does not match, got: " + err.Error())
+	}
+}
+
+func assertBinary(client *Client) {
+	var payload = []byte{0x66, 0x6F, 0x6F, 0x62, 0x61, 0x72}
+
+	response, err := client.Test().Binary(payload)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if !bytes.Equal(*response, payload) {
+		log.Fatal("Test assertBinary failed")
+	}
+}
+
+func assertForm(client *Client) {
+	var payload = url.Values{}
+	payload.Set("foo", "bar")
+
+	response, err := client.Test().Form(payload)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if response.Get("foo") != "bar" {
+		log.Fatal("Test assertForm failed")
+	}
+}
+
+func assertJson(client *Client) {
+	var payload = make(map[string]string)
+	payload["foo"] = "bar"
+
+	response, err := client.Test().Json(payload)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if response == nil {
+		log.Fatal("Test assertJson failed, no response")
+	}
+
+	left, _ := json.Marshal(payload)
+	right, _ := json.Marshal(&response)
+
+	if !bytes.Equal(left, right) {
+		log.Fatal("Test assertJson failed")
+	}
+}
+
+func assertText(client *Client) {
+	var payload = "foobar"
+
+	response, err := client.Test().Text(payload)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if payload != response {
+		log.Fatal("Test assertText failed")
+	}
+}
+
+func assertXml(client *Client) {
+	var payload = "<foo>bar</foo>"
+
+	response, err := client.Test().Xml(payload)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if payload != response {
+		log.Fatal("Test assertXml failed")
 	}
 }
