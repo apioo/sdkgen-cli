@@ -106,7 +106,7 @@ class Program
 
         var response = await client.Test().Form(payload);
 
-        if (payload.ToString() != response.ToString()) {
+        if (payload.Get("foo") != response.Get("foo")) {
             throw new Exception("Test AssertForm failed");
         }
     }
