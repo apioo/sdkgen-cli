@@ -26,6 +26,22 @@ class Program
         if (message.Message != "Hello World!") {
             throw new Exception("Test assertGetHello failed: Message, got: " + message.Message);
         }
+
+        if (message.Category != "default") {
+            throw new Exception("Test assertGetHello failed: Category, got: " + message.Category);
+        }
+
+        if (message.Priority != 7) {
+            throw new Exception("Test assertGetHello failed: Priority, got: " + message.Priority);
+        }
+
+        if (message.Weight != 13.37) {
+            throw new Exception("Test assertGetHello failed: Weight, got: " + message.Weight);
+        }
+
+        if (message.Done != true) {
+            throw new Exception("Test assertGetHello failed: Done, got: " + message.Done);
+        }
     }
 
     private static async Task AssertGetEntries(Client client)

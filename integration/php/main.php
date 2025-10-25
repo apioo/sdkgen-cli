@@ -31,6 +31,22 @@ function assertGetHello(\SDK\Client $client): void
     if ($message->getMessage() != 'Hello World!') {
         throw new RuntimeException('Test assertGetHello failed: Message, got: ' . $message->getMessage());
     }
+
+    if ($message->getCategory() != 'default') {
+        throw new RuntimeException("Test assertGetHello failed: Category, got: " . $message->getCategory());
+    }
+
+    if ($message->getPriority() != 7) {
+        throw new RuntimeException("Test assertGetHello failed: Priority, got: " . $message->getPriority());
+    }
+
+    if ($message->getWeight() != 13.37) {
+        throw new RuntimeException("Test assertGetHello failed: Weight, got: " . $message->getWeight());
+    }
+
+    if ($message->getDone() != true) {
+        throw new RuntimeException("Test assertGetHello failed: Done, got: " . $message->getDone());
+    }
 }
 
 function assertGetEntries(\SDK\Client $client): void

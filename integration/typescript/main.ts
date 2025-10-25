@@ -24,6 +24,25 @@ async function assertGetHello(client: Client) {
     if (message.message != 'Hello World!') {
         throw new Error('Test assertGetHello failed: Message, got: ' + message.message);
     }
+
+    // currently for TS we use interfaces and therefor we cant set default values
+    /*
+    if (message.category != 'default') {
+        throw new Error("Test assertGetHello failed: Category, got: " + message.category);
+    }
+    */
+
+    if (message.priority != 7) {
+        throw new Error("Test assertGetHello failed: Priority, got: " + message.priority);
+    }
+
+    if (message.weight != 13.37) {
+        throw new Error("Test assertGetHello failed: Weight, got: " + message.weight);
+    }
+
+    if (message.done != true) {
+        throw new Error("Test assertGetHello failed: Done, got: " + message.done);
+    }
 }
 
 async function assertGetEntries(client: Client) {

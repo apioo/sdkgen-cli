@@ -10,6 +10,18 @@ def assert_get_hello(client: Client):
     if message.message != 'Hello World!':
         raise Exception('Test assert_get_hello failed: Message, got: ' + message.message)
 
+    if message.category != 'default':
+        raise Exception('Test assert_get_hello failed: Category, got: ' + message.category)
+
+    if message.priority != 7:
+        raise Exception('Test assert_get_hello failed: Priority, got: ' + message.priority)
+
+    if message.weight != 13.37:
+        raise Exception('Test assert_get_hello failed: Weight, got: ' + message.weight)
+
+    if message.done != true:
+        raise Exception('Test assert_get_hello failed: Done, got: ' + message.done)
+
 
 def assert_get_entries(client: Client):
     todos = client.test().get_entries(0, 16)

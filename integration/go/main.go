@@ -38,6 +38,22 @@ func assertGetHello(client *Client) {
 	if message.Message != "Hello World!" {
 		log.Fatal("Test assertGetHello failed: Message, got: " + message.Message)
 	}
+
+	if message.Category != "default" {
+		log.Fatal("Test assertGetHello failed: Category, got: " + message.Category)
+	}
+
+	if message.Priority != 7 {
+		log.Fatal("Test assertGetHello failed: Priority, got: " + message.Priority)
+	}
+
+	if message.Weight != 13.37 {
+		log.Fatal("Test assertGetHello failed: Weight, got: " + message.Weight)
+	}
+
+	if message.Done != true {
+		log.Fatal("Test assertGetHello failed: Done, got: " + message.Done)
+	}
 }
 
 func assertGetEntries(client *Client) {
