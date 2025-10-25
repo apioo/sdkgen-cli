@@ -142,7 +142,27 @@
       "type": "object",
       "properties": {
         "message": {
-          "type": "string"
+          "description": "The hello world message",
+          "type": "string",
+          "nullable": false
+        },
+        "category": {
+          "description": "Category of this message",
+          "type": "string",
+          "default": "default"
+        },
+        "priority": {
+          "description": "Priority of this message",
+          "type": "integer",
+          "deprecated": true
+        },
+        "weight": {
+          "description": "Weight of this message",
+          "type": "number"
+        },
+        "done": {
+          "description": "Whether the message is done",
+          "type": "boolean"
         }
       }
     },
