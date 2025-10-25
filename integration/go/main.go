@@ -44,11 +44,11 @@ func assertGetHello(client *Client) {
 	}
 
 	if message.Priority != 7 {
-		log.Fatal("Test assertGetHello failed: Priority, got: " + strconv.FormatInt(message.Priority))
+		log.Fatal("Test assertGetHello failed: Priority, got: " + strconv.FormatInt(int64(message.Priority), 10))
 	}
 
 	if message.Weight != 13.37 {
-		log.Fatal("Test assertGetHello failed: Weight, got: " + strconv.FormatFloat(message.Weight))
+		log.Fatal("Test assertGetHello failed: Weight, got: " + strconv.FormatFloat(message.Weight, 10, 2))
 	}
 
 	if message.Done != true {
