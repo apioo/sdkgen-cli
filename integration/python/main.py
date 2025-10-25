@@ -19,7 +19,7 @@ def assert_get_hello(client: Client):
     if message.weight != 13.37:
         raise Exception('Test assert_get_hello failed: Weight, got: ' + message.weight)
 
-    if message.done != true:
+    if message.done != True:
         raise Exception('Test assert_get_hello failed: Done, got: ' + message.done)
 
 
