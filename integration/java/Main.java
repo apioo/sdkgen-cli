@@ -35,19 +35,19 @@ public class Main {
         }
 
         if (!message.getCategory().equals("default")) {
-            throw new RuntimeException("Test assertGetHello failed: Category, got: " + message.getCategory();
+            throw new RuntimeException("Test assertGetHello failed: Category, got: " + message.getCategory());
         }
 
         if (message.getPriority() != 7) {
-            throw new RuntimeException("Test assertGetHello failed: Priority, got: " + message.getPriority();
+            throw new RuntimeException("Test assertGetHello failed: Priority, got: " + message.getPriority());
         }
 
         if (message.getWeight() != 13.37) {
-            throw new RuntimeException("Test assertGetHello failed: Weight, got: " + message.getWeight();
+            throw new RuntimeException("Test assertGetHello failed: Weight, got: " + message.getWeight());
         }
 
         if (message.getDone() != true) {
-            throw new RuntimeException("Test assertGetHello failed: Done, got: " + message.getDone();
+            throw new RuntimeException("Test assertGetHello failed: Done, got: " + message.getDone());
         }
     }
 
