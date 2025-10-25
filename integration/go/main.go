@@ -48,7 +48,7 @@ func assertGetHello(client *Client) {
 	}
 
 	if message.Weight != 13.37 {
-		log.Fatal("Test assertGetHello failed: Weight, got: " + strconv.FormatFloat(message.Weight, 10, 2))
+		log.Fatal("Test assertGetHello failed: Weight, got: " + strconv.FormatFloat(message.Weight, 'f', 10, 2))
 	}
 
 	if message.Done != true {
