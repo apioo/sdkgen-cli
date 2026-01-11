@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"github.com/apioo/sdkgen-cli/sdk"
-	"github.com/apioo/sdkgen-go"
+	"github.com/apioo/sdkgen-go/v2"
 	"log"
 	"os"
 )

@@ -3,9 +3,9 @@ module github.com/apioo/sdkgen-cli
 go 1.18
 
 require (
-	github.com/apioo/sdkgen-go v1.0.3
+	github.com/apioo/sdkgen-go/v2 v2.0.3
 	github.com/joho/godotenv v1.5.1
-	github.com/spf13/cobra v1.10.1
+	github.com/spf13/cobra v1.10.2
 )
 
 require (
