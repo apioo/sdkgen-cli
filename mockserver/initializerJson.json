@@ -79,7 +79,7 @@
       "path": "/form-config"
     },
     "httpResponse": {
-      "statusCode": 500,
+      "statusCode": 200,
       "body": {
         "elements": [{
           "element": "input",
