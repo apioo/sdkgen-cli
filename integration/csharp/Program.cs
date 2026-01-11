@@ -12,6 +12,7 @@ class Program
         await AssertGetEntries(client);
         await AssertInsert(client);
         await AssertThrowException(client);
+        await AssertGetFormConfig(client);
         await AssertBinary(client);
         await AssertForm(client);
         await AssertJson(client);
@@ -99,6 +100,47 @@ class Program
             if (e.Payload.Message != "Error") {
                 throw new Exception("Test assertThrowException failed: Error message does not match, got: " + e.Payload.Message);
             }
+        }
+    }
+
+    private static async Task AssertGetFormConfig(Client client)
+    {
+        CommonFormContainer form = await client.Test().GetFormConfig();
+
+        if (form.Elements.Count != 3) {
+            throw new Exception("Test assertForm failed: Elements, got: " + form.Elements.Count);
+        }
+
+        if (form.Elements[0].GetType().Name !== "CommonFormElementInput") {
+            throw new Exception("Test assertForm failed: Elements.0, got: " + form.Elements[0].GetType().Name);
+        }
+
+        if (form.Elements[0].Element !== "input") {
+            throw new Exception("Test assertForm failed: Elements.0.Element, got: " + form.Elements[0].Element);
+        }
+
+        if (form.Elements[0].Type !== "text") {
+            throw new Exception("Test assertForm failed: Elements.0.Type, got: " + form.Elements[0].Type);
+        }
+
+        if (form.Elements[1].GetType().Name !== "CommonFormElementSelect") {
+            throw new Exception("Test assertForm failed: Elements.1, got: " + form.Elements[1].GetType().Name);
+        }
+
+        if (form.Elements[1].Element !== "select") {
+            throw new Exception("Test assertForm failed: Elements.1.Element, got: " + form.Elements[1].Element);
+        }
+
+        if (form.Elements[1].Options.Count !== 2) {
+            throw new Exception("Test assertForm failed: Elements.1.Options, got: " + form.Elements[1].Options.Count);
+        }
+
+        if (form.Elements[2].GetType().Name !== "CommonFormElementTextArea") {
+            throw new Exception("Test assertForm failed: Elements.2, got: " + form.Elements[2].GetType().Name);
+        }
+
+        if (form.Elements[2].Element !== "textarea") {
+            throw new Exception("Test assertForm failed: Elements.2.Element, got: " + form.Elements[2].Element);
         }
     }
 

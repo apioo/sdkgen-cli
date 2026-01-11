@@ -75,6 +75,26 @@
   },
   {
     "httpRequest": {
+      "method": "GET",
+      "path": "/form-config"
+    },
+    "httpResponse": {
+      "statusCode": 500,
+      "body": {
+        "elements": [{
+          "element": "input",
+          "type": "text"
+        }, {
+          "element": "select",
+          "options": ["foo", "bar"]
+        }, {
+          "element": "textarea"
+        }]
+      }
+    }
+  },
+  {
+    "httpRequest": {
       "method": "POST",
       "path": "/binary",
       "headers": {
