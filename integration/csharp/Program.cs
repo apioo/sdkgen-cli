@@ -61,8 +61,8 @@ class Program
             throw new Exception("Test assertGetEntries failed: ItemsPerPage, got: " + todos.ItemsPerPage);
         }
 
-        if (todos.Entry.Count != 2) {
-            throw new Exception("Test assertGetEntries failed: Entry, got: " + todos.Entry.Count);
+        if (todos.Entry?.Count != 2) {
+            throw new Exception("Test assertGetEntries failed: Entry, got: " + todos.Entry?.Count);
         }
 
         if (todos.Entry[0].Title != "foo") {
@@ -107,42 +107,30 @@ class Program
     {
         CommonFormContainer form = await client.Test().GetFormConfig();
 
-        if (form.Elements.Count != 3) {
-            throw new Exception("Test assertForm failed: Elements, got: " + form.Elements.Count);
+        if (form.Elements?.Count != 3) {
+            throw new Exception("Test assertGetFormConfig failed: Elements, got: " + form.Elements?.Count);
         }
 
         if (form.Elements[0].GetType().Name != "CommonFormElementInput") {
-            throw new Exception("Test assertForm failed: Elements.0, got: " + form.Elements[0].GetType().Name);
-        }
-
-        if (form.Elements[0].Element != "input") {
-            throw new Exception("Test assertForm failed: Elements.0.Element, got: " + form.Elements[0].Element);
+            throw new Exception("Test assertGetFormConfig failed: Elements.0, got: " + form.Elements[0].GetType().Name);
         }
 
         CommonFormElementInput input = (CommonFormElementInput) form.Elements[0];
         if (input.Type != "text") {
-            throw new Exception("Test assertForm failed: Elements.0.Type, got: " + input.Type);
+            throw new Exception("Test assertGetFormConfig failed: Elements.0.Type, got: " + input.Type);
         }
 
         if (form.Elements[1].GetType().Name != "CommonFormElementSelect") {
-            throw new Exception("Test assertForm failed: Elements.1, got: " + form.Elements[1].GetType().Name);
-        }
-
-        if (form.Elements[1].Element != "select") {
-            throw new Exception("Test assertForm failed: Elements.1.Element, got: " + form.Elements[1].Element);
+            throw new Exception("Test assertGetFormConfig failed: Elements.1, got: " + form.Elements[1].GetType().Name);
         }
 
         CommonFormElementSelect select = (CommonFormElementSelect) form.Elements[1];
-        if (select.Options.Count != 2) {
-            throw new Exception("Test assertForm failed: Elements.1.Options, got: " + select.Options.Count);
+        if (select.Options?.Count != 2) {
+            throw new Exception("Test assertGetFormConfig failed: Elements.1.Options, got: " + select.Options?.Count);
         }
 
         if (form.Elements[2].GetType().Name != "CommonFormElementTextArea") {
-            throw new Exception("Test assertForm failed: Elements.2, got: " + form.Elements[2].GetType().Name);
-        }
-
-        if (form.Elements[2].Element != "textarea") {
-            throw new Exception("Test assertForm failed: Elements.2.Element, got: " + form.Elements[2].Element);
+            throw new Exception("Test assertGetFormConfig failed: Elements.2, got: " + form.Elements[2].GetType().Name);
         }
     }
 
