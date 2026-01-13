@@ -1,6 +1,9 @@
 from sdkgen import Anonymous
 
 from sdk.client import Client
+from sdk.common_form_element_input import CommonFormElementInput
+from sdk.common_form_element_select import CommonFormElementSelect
+from sdk.common_form_element_text_area import CommonFormElementTextArea
 from sdk.error_exception import ErrorException
 from sdk.todo import Todo
 
@@ -68,6 +71,30 @@ def assert_throw_exception(client: Client):
             raise Exception("Test assert_throw_exception failed: Error message does not match, got: " + e.payload.message)
 
 
+def assert_get_form_config(client: Client):
+    form = client.test().get_form_config()
+
+    if len(form.elements) != 3:
+        raise Exception("Test assert_get_form_config failed: Elements, got: " + len(form.elements))
+
+    if isinstance(form.elements[0], CommonFormElementInput):
+        raise Exception("Test assert_get_form_config failed: Elements.0, got: " + type(form.elements[0]))
+
+    input = form.elements[0]
+    if input.type != "text":
+        raise Exception("Test assert_get_form_config failed: Elements.0.Type, got: " + input.type)
+
+    if isinstance(form.elements[1], CommonFormElementSelect):
+        raise Exception("Test assert_get_form_config failed: Elements.1, got: " + type(form.elements[1]))
+
+    select = form.elements[1]
+    if len(select.options) != 2:
+        raise Exception("Test assert_get_form_config failed: Elements.0.Options, got: " + len(select.options))
+
+    if isinstance(form.elements[2], CommonFormElementTextArea):
+        raise Exception("Test assert_get_form_config failed: Elements.2, got: " + type(form.elements[2]))
+
+
 def assert_binary(client: Client):
     payload = bytes([0x66, 0x6F, 0x6F, 0x62, 0x61, 0x72])
 
@@ -124,6 +151,7 @@ assert_get_hello(client)
 assert_get_entries(client)
 assert_insert(client)
 assert_throw_exception(client)
+assert_get_form_config(client)
 assert_binary(client)
 assert_form(client)
 assert_json(client)
