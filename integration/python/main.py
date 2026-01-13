@@ -89,7 +89,7 @@ def assert_get_form_config(client: Client):
 
     select = form.elements[1]
     if len(select.options) != 2:
-        raise Exception("Test assert_get_form_config failed: Elements.0.Options, got: " + len(select.options))
+        raise Exception("Test assert_get_form_config failed: Elements.1.Options, got: " + len(select.options))
 
     if isinstance(form.elements[2], CommonFormElementTextArea):
         raise Exception("Test assert_get_form_config failed: Elements.2, got: " + type(form.elements[2]))
