@@ -83,12 +83,15 @@
       "body": {
         "elements": [{
           "element": "input",
+          "name": "Title",
           "type": "text"
         }, {
           "element": "select",
-          "options": ["foo", "bar"]
+          "name": "Status",
+          "options": ["Active", "Inactive"]
         }, {
-          "element": "textarea"
+          "element": "textarea",
+          "name": "Description"
         }]
       }
     }
