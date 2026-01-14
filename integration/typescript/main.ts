@@ -11,6 +11,7 @@ async function main() {
     await assertGetEntries(client);
     await assertInsert(client);
     await assertThrowException(client);
+    await assertGetFormConfig(client);
     await assertBinary(client);
     await assertForm(client);
     await assertJson(client);
@@ -98,6 +99,34 @@ async function assertThrowException(client: Client) {
         if (e instanceof ErrorException && e.getPayload().message != "Error") {
             throw new Error("Test assertThrowException failed: Error message does not match, got: " + e.getPayload().message);
         }
+    }
+}
+
+async function assertGetFormConfig(client: Client) {
+    const form = await client.test().getFormConfig();
+
+    if (form.elements.length != 3) {
+        throw new Error("Test assertGetFormConfig failed: Elements, got: " + form.elements.length);
+    }
+
+    if (form.elements[0].element !== 'input') {
+        throw new Error("Test assertGetFormConfig failed: Elements.0, got: " + form.elements[0].element);
+    }
+
+    if (form.elements[0].type !== "text") {
+        throw new Error("Test assertGetFormConfig failed: Elements.0.Type, got: " + form.elements[0].type);
+    }
+
+    if (form.elements[1].element !== 'select') {
+        throw new Error("Test assertGetFormConfig failed: Elements.1, got: " + form.elements[1].element);
+    }
+
+    if (form.elements[1].options.length != 2) {
+        throw new Error("Test assertGetFormConfig failed: Elements.1.Options, got: " + form.elements[1].options.length);
+    }
+
+    if (form.elements[2].element !== 'textarea') {
+        throw new Error("Test assertGetFormConfig failed: Elements.2, got: " + form.elements[2].element);
     }
 }
 
