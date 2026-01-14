@@ -116,7 +116,7 @@ public class Main {
             throw new RuntimeException("Test assertGetFormConfig failed: Elements, got: " + form.getElements().size());
         }
 
-        if (!form.getElements().get(0) instanceof CommonFormElementInput) {
+        if (!(form.getElements().get(0) instanceof CommonFormElementInput)) {
             throw new RuntimeException("Test assertGetFormConfig failed: Elements.0, got: " + form.getElements().get(0).getClass().getName());
         }
 
@@ -125,7 +125,7 @@ public class Main {
             throw new RuntimeException("Test assertGetFormConfig failed: Elements.0.Type, got: " + input.getType());
         }
 
-        if (!form.getElements().get(1) instanceof CommonFormElementSelect) {
+        if (!(form.getElements().get(1) instanceof CommonFormElementSelect)) {
             throw new RuntimeException("Test assertGetFormConfig failed: Elements.1, got: " + form.getElements().get(1).getClass().getName());
         }
 
@@ -134,7 +134,7 @@ public class Main {
             throw new RuntimeException("Test assertGetFormConfig failed: Elements.1.Options, got: " + select.getOptions().size());
         }
 
-        if (!form.getElements().get(2) instanceof CommonFormElementTextArea) {
+        if (!(form.getElements().get(2) instanceof CommonFormElementTextArea)) {
             throw new RuntimeException("Test assertGetFormConfig failed: Elements.2, got: " + form.getElements().get(2).getClass().getName());
         }
     }
