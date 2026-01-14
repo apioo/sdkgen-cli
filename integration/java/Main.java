@@ -20,6 +20,7 @@ public class Main {
         assertGetEntries(client);
         assertInsert(client);
         assertThrowException(client);
+        assertGetFormConfig(client);
         assertBinary(client);
         assertForm(client);
         assertJson(client);
@@ -104,6 +105,37 @@ public class Main {
             if (!e.getPayload().getMessage().equals("Error")) {
                 throw new RuntimeException("Test assertThrowException failed: Error message does not match, got: " + e.getPayload().getMessage());
             }
+        }
+    }
+
+    private static void assertGetFormConfig(Client client) throws ClientException
+    {
+        CommonFormContainer form = await client.Test().GetFormConfig();
+
+        if (form.getElements().size() != 3) {
+            throw new RuntimeException("Test assertGetFormConfig failed: Elements, got: " + form.getElements().size();
+        }
+
+        if (!form.getElements().get(0) instanceof CommonFormElementInput) {
+            throw new RuntimeException("Test assertGetFormConfig failed: Elements.0, got: " + form.getElements().get(0).getClass().getName());
+        }
+
+        CommonFormElementInput input = (CommonFormElementInput) form.getElements().get(0);
+        if (!input.getType().equals("text")) {
+            throw new RuntimeException("Test assertGetFormConfig failed: Elements.0.Type, got: " + input.getType());
+        }
+
+        if (!form.getElements().get(1) instanceof CommonFormElementSelect) {
+            throw new RuntimeException("Test assertGetFormConfig failed: Elements.1, got: " + form.getElements().get(1).getClass().getName());
+        }
+
+        CommonFormElementSelect select = (CommonFormElementSelect) form.getElements().get(1);
+        if (select.getOptions().size() != 2) {
+            throw new RuntimeException("Test assertGetFormConfig failed: Elements.1.Options, got: " + select.getOptions().size());
+        }
+
+        if (!form.getElements().get(2) instanceof CommonFormElementTextArea) {
+            throw new RuntimeException("Test assertGetFormConfig failed: Elements.2, got: " + form.getElements().get(2).getClass().getName());
         }
     }
 
