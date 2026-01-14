@@ -113,7 +113,7 @@ public class Main {
         CommonFormContainer form = client.test().getFormConfig();
 
         if (form.getElements().size() != 3) {
-            throw new RuntimeException("Test assertGetFormConfig failed: Elements, got: " + form.getElements().size();
+            throw new RuntimeException("Test assertGetFormConfig failed: Elements, got: " + form.getElements().size());
         }
 
         if (!form.getElements().get(0) instanceof CommonFormElementInput) {
