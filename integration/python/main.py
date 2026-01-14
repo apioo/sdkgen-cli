@@ -77,21 +77,21 @@ def assert_get_form_config(client: Client):
     if len(form.elements) != 3:
         raise Exception("Test assert_get_form_config failed: Elements, got: " + len(form.elements))
 
-    if !isinstance(form.elements[0], CommonFormElementInput):
+    if not isinstance(form.elements[0], CommonFormElementInput):
         raise Exception("Test assert_get_form_config failed: Elements.0, got: " + form.elements[0].__class__.__name__)
 
     input = form.elements[0]
     if input.type != "text":
         raise Exception("Test assert_get_form_config failed: Elements.0.Type, got: " + input.type)
 
-    if !isinstance(form.elements[1], CommonFormElementSelect):
+    if not isinstance(form.elements[1], CommonFormElementSelect):
         raise Exception("Test assert_get_form_config failed: Elements.1, got: " + form.elements[1].__class__.__name__)
 
     select = form.elements[1]
     if len(select.options) != 2:
         raise Exception("Test assert_get_form_config failed: Elements.1.Options, got: " + len(select.options))
 
-    if !isinstance(form.elements[2], CommonFormElementTextArea):
+    if not isinstance(form.elements[2], CommonFormElementTextArea):
         raise Exception("Test assert_get_form_config failed: Elements.2, got: " + form.elements[2].__class__.__name__)
 
 
