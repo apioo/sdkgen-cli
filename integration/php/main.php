@@ -119,7 +119,7 @@ function assertGetFormConfig(\SDK\Client $client): void
         throw new RuntimeException("Test assertGetFormConfig failed: Elements, got: " . count($form->getElements()));
     }
 
-    if (!$form->getElements()[0] instanceof CommonFormElementInput) {
+    if (!$form->getElements()[0] instanceof \SDK\CommonFormElementInput) {
         throw new RuntimeException("Test assertGetFormConfig failed: Elements.0, got: " . get_debug_type($form->getElements()[0]));
     }
 
@@ -128,7 +128,7 @@ function assertGetFormConfig(\SDK\Client $client): void
         throw new RuntimeException("Test assertGetFormConfig failed: Elements.0.Type, got: " . $input->getType());
     }
 
-    if (!$form->getElements()[1] instanceof CommonFormElementSelect) {
+    if (!$form->getElements()[1] instanceof \SDK\CommonFormElementSelect) {
         throw new RuntimeException("Test assertGetFormConfig failed: Elements.1, got: " . get_debug_type($form->getElements()[1]));
     }
 
@@ -137,7 +137,7 @@ function assertGetFormConfig(\SDK\Client $client): void
         throw new RuntimeException("Test assertGetFormConfig failed: Elements.1.Options, got: " . count($select->getOptions()));
     }
 
-    if (!$form->getElements()[2] instanceof CommonFormElementTextArea) {
+    if (!$form->getElements()[2] instanceof \SDK\CommonFormElementTextArea) {
         throw new RuntimeException("Test assertGetFormConfig failed: Elements.2, got: " . get_debug_type($form->getElements()[2]));
     }
 }
