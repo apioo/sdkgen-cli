@@ -2,19 +2,6 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-require_once __DIR__ . '/TestTag.php';
-require_once __DIR__ . '/Error.php';
-require_once __DIR__ . '/ErrorException.php';
-require_once __DIR__ . '/HelloWorld.php';
-require_once __DIR__ . '/Response.php';
-require_once __DIR__ . '/Todo.php';
-require_once __DIR__ . '/Todos.php';
-require_once __DIR__ . '/Client.php';
-require_once __DIR__ . '/CommonFormElement.php';
-require_once __DIR__ . '/CommonFormElementInput.php';
-require_once __DIR__ . '/CommonFormElementSelect.php';
-require_once __DIR__ . '/CommonFormElementTextArea.php';
-
 $credentials = new \Sdkgen\Client\Credentials\Anonymous();
 $client = new \SDK\Client('http://127.0.0.1:1080', $credentials);
 

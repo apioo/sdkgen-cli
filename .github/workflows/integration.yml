@@ -137,9 +137,11 @@ jobs:
           SDKGEN_CLIENT_ID: ${{ secrets.SDKGEN_CLIENT_ID }}
           SDKGEN_CLIENT_SECRET: ${{ secrets.SDKGEN_CLIENT_SECRET }}
         run: docker compose up
+      - name: Create src dir
+        run: mkdir src
       - name: Move
         working-directory: .
-        run: cp ./output/*.php ./integration/php/
+        run: cp ./output/*.php ./integration/php/src
       - name: Composer install
         run: composer install --no-interaction --no-ansi --no-progress
       - name: Run
