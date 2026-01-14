@@ -107,6 +107,37 @@ function assertThrowException(\SDK\Client $client): void
     }
 }
 
+function assertGetFormConfig(\SDK\Client $client): void
+{
+    $form = $client->test()->getFormConfig();
+
+    if (count($form->getElements()) != 3) {
+        throw new RuntimeException("Test assertGetFormConfig failed: Elements, got: " . count($form->getElements()));
+    }
+
+    if (!$form->getElements()[0] instanceof CommonFormElementInput) {
+        throw new RuntimeException("Test assertGetFormConfig failed: Elements.0, got: " . get_debug_type($form->getElements()[0]));
+    }
+
+    $input = $form->getElements()[0];
+    if ($input->getType() !== "text") {
+        throw new RuntimeException("Test assertGetFormConfig failed: Elements.0.Type, got: " . $input->getType());
+    }
+
+    if (!$form->getElements()[1] instanceof CommonFormElementSelect) {
+        throw new RuntimeException("Test assertGetFormConfig failed: Elements.1, got: " . get_debug_type($form->getElements()[1]));
+    }
+
+    $select = $form->getElements()[1];
+    if (count($select->getOptions()) != 2) {
+        throw new RuntimeException("Test assertGetFormConfig failed: Elements.1.Options, got: " . count($select->getOptions()));
+    }
+
+    if (!$form->getElements()[2] instanceof CommonFormElementTextArea) {
+        throw new RuntimeException("Test assertGetFormConfig failed: Elements.2, got: " . get_debug_type($form->getElements()[2]));
+    }
+}
+
 function assertBinary(\SDK\Client $client): void
 {
     $handle = fopen('php://memory', 'w+');
