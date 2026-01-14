@@ -110,7 +110,7 @@ public class Main {
 
     private static void assertGetFormConfig(Client client) throws ClientException
     {
-        CommonFormContainer form = await client.Test().GetFormConfig();
+        CommonFormContainer form = client.test().getFormConfig();
 
         if (form.getElements().size() != 3) {
             throw new RuntimeException("Test assertGetFormConfig failed: Elements, got: " + form.getElements().size();
