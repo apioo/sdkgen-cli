@@ -105,8 +105,8 @@ async function assertThrowException(client: Client) {
 async function assertGetFormConfig(client: Client) {
     const form = await client.test().getFormConfig();
 
-    if (form.elements.length != 3) {
-        throw new Error("Test assertGetFormConfig failed: Elements, got: " + form.elements.length);
+    if (form.elements?.length != 3) {
+        throw new Error("Test assertGetFormConfig failed: Elements, got: " + form.elements?.length);
     }
 
     if (form.elements[0].element !== 'input') {
@@ -121,8 +121,8 @@ async function assertGetFormConfig(client: Client) {
         throw new Error("Test assertGetFormConfig failed: Elements.1, got: " + form.elements[1].element);
     }
 
-    if (form.elements[1].options.length != 2) {
-        throw new Error("Test assertGetFormConfig failed: Elements.1.Options, got: " + form.elements[1].options.length);
+    if (form.elements[1].options?.length != 2) {
+        throw new Error("Test assertGetFormConfig failed: Elements.1.Options, got: " + form.elements[1].options?.length);
     }
 
     if (form.elements[2].element !== 'textarea') {
