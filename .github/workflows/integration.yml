@@ -197,7 +197,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '22.x'
       - name: Init mockserver
         run: "curl -X PUT http://127.0.0.1:1080/mockserver/expectation -H 'Content-Type: application/json' -d @./../../mockserver/initializerJson.json"
       - name: Move sdkgen.json file
