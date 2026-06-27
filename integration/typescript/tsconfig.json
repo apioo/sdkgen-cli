@@ -5,6 +5,7 @@
     "lib": ["es2020", "dom"],
     "strict": true,
     "moduleResolution": "node16",
+    "types": ["node"],
     "outDir": "dist"
   },
   "files": [
