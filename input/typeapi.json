@@ -157,7 +157,7 @@
   },
   "definitions": {
     "Hello_World": {
-      "type": "object",
+      "type": "struct",
       "properties": {
         "message": {
           "description": "The hello world message",
@@ -185,7 +185,7 @@
       }
     },
     "Todos": {
-      "type": "object",
+      "type": "struct",
       "properties": {
         "totalResults": {
           "type": "integer"
@@ -206,7 +206,7 @@
       }
     },
     "Todo": {
-      "type": "object",
+      "type": "struct",
       "properties": {
         "title": {
           "type": "string"
@@ -214,7 +214,7 @@
       }
     },
     "Response": {
-      "type": "object",
+      "type": "struct",
       "properties": {
         "success": {
           "type": "boolean"
@@ -225,7 +225,7 @@
       }
     },
     "Error": {
-      "type": "object",
+      "type": "struct",
       "properties": {
         "success": {
           "type": "boolean"
