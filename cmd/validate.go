@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/apioo/sdkgen-cli/spec"
 	"github.com/santhosh-tekuri/jsonschema/v6"
@@ -22,18 +23,22 @@ var validateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		schemaFile := args[0]
 
-		fileBytes, err := os.ReadFile(schemaFile)
+		cwd, err := os.Getwd()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		schemaFilePath := filepath.Join(cwd, schemaFile)
+		fileBytes, err := readFile(schemaFilePath)
 		if err != nil {
 			log.Fatalf("Error reading file %s: %v\n", schemaFile, err)
 		}
 
-		// 1. Unmarshal embedded schema JSON into a generic interface
 		var schemaDoc interface{}
 		if err := json.Unmarshal([]byte(spec.TypeAPISchema), &schemaDoc); err != nil {
 			log.Fatalf("Failed to unmarshal embedded TypeAPI schema: %v\n", err)
 		}
 
-		// 2. Compile JSON Schema engine
 		compiler := jsonschema.NewCompiler()
 		if err := compiler.AddResource("schema.json", schemaDoc); err != nil {
 			log.Fatalf("Failed to register schema resource: %v\n", err)
@@ -44,7 +49,6 @@ var validateCmd = &cobra.Command{
 			log.Fatalf("Failed to compile TypeAPI validator: %v\n", err)
 		}
 
-		// 3. Unmarshal and validate target JSON file
 		var targetDoc interface{}
 		if err := json.Unmarshal(fileBytes, &targetDoc); err != nil {
 			log.Fatalf("Invalid JSON file syntax in %s: %v\n", schemaFile, err)
