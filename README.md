@@ -64,6 +64,27 @@ To validate an existing TypeAPI specification you can use the "validate" command
 
 > sdkgen validate typeapi.json
 
+## Inspect
+
+To quickly get an overview about an existing specification you can use the inspect command.
+
+> sdkgen inspect typeapi.json
+
+It outputs an overview about all operations and types for example:
+
+```
+Operations:
+- test.getEntries [GET /todo] (arguments: startIndex, count)
+- test.insert [POST /todo] (arguments: payload)
+- test.throwException [GET /exception] (arguments: )
+
+Types:
+- Todo (properties: title)
+- Response (properties: success, message)
+- Error (properties: success, message)
+- Todos (properties: itemsPerPage, entry, totalResults, startIndex)
+```
+
 ## Docker
 
 This repository contains also a simple docker file to execute the generator if you dont want to use the binary directly.
