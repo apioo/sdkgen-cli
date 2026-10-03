@@ -58,6 +58,12 @@ Lists all available types which can be used at the generate command.
 * __--client-secret__  
   This client secret is either your password or an app secret which you can create at our backend.
 
+## Validate
+
+To validate an existing TypeAPI specification you can use the "validate" command.
+
+> sdkgen validate typeapi.json
+
 ## Docker
 
 This repository contains also a simple docker file to execute the generator if you dont want to use the binary directly.
