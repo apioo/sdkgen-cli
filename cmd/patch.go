@@ -36,12 +36,11 @@ var patchCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		schemaFile := args[0]
 
-		cwd, err := os.Getwd()
+		schemaFilePath, err := filepath.Abs(schemaFile)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		schemaFilePath := filepath.Join(cwd, schemaFile)
 		fileBytes, err := os.ReadFile(schemaFilePath)
 		if err != nil {
 			log.Fatalf("Error reading schema file %s: %v\n", schemaFile, err)

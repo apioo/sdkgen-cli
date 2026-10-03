@@ -22,11 +22,6 @@ var generateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var client = sdkClient.GetClient()
 
-		cwd, err := os.Getwd()
-		if err != nil {
-			log.Fatal(err)
-		}
-
 		var generatorType = args[0]
 		var schemaFile = args[1]
 		var outputDir = args[2]
@@ -42,7 +37,11 @@ var generateCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		var targetDir = filepath.Join(cwd, outputDir)
+		targetDir, err := filepath.Abs(outputDir)
+		if err != nil {
+			log.Fatal(err)
+		}
+
 		var mapping = make(map[string]string)
 
 		Generate(client, generatorType, schema, targetDir, sdkClient.Namespace, sdkClient.BaseUrl, mapping, sdkClient.Remove)
